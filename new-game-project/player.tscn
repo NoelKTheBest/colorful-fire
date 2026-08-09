@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ckudr8chj1kgo"]
+
+[ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_4flbx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u4nj2"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vosfo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxwtl"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=2000016662]
+script = ExtResource("1_4flbx")
+accel = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=35280423]
+shape = SubResource("CapsuleShape2D_u4nj2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=409545675]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2009145509]
+root_node = NodePath("../Sprite2D")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1670457503]
+root_node = NodePath("../Sprite2D")
+tree_root = SubResource("AnimationNodeStateMachine_vosfo")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1588347602]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1291681798]
+shape = SubResource("CircleShape2D_yxwtl")
