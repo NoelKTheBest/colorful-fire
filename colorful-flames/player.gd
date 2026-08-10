@@ -14,6 +14,8 @@ func _ready() -> void:
 	flames.position = $FireSpawnPosition.position
 	add_child(flames)
 	var mother = get_parent()
+	# Defer call since new nodes cannot get added to parent until all child nodes have been accounted for
+	# instantiating a child of this object is easy because the engine starts with the bottom-most children first
 	flames.reparent.call_deferred(mother)
 
 
