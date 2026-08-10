@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://v64c3nwyqpws"]
+
+[ext_resource type="Texture2D" uid="uid://bfxenleamxlqf" path="res://fire_fx_v1.0/png/orange/loops/burning_loop_1.png" id="1_5l8fu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg7va"]
+atlas = ExtResource("1_5l8fu")
+region = Rect2(0, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l8fu"]
+atlas = ExtResource("1_5l8fu")
+region = Rect2(24, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryqqn"]
+atlas = ExtResource("1_5l8fu")
+region = Rect2(48, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybmfv"]
+atlas = ExtResource("1_5l8fu")
+region = Rect2(72, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw85l"]
+atlas = ExtResource("1_5l8fu")
+region = Rect2(96, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wkcx"]
+atlas = ExtResource("1_5l8fu")
+region = Rect2(120, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xblig"]
+atlas = ExtResource("1_5l8fu")
+region = Rect2(144, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uc1kp"]
+atlas = ExtResource("1_5l8fu")
+region = Rect2(168, 0, 24, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yxwtl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg7va")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5l8fu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryqqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybmfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hw85l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wkcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xblig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uc1kp")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 11.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxwtl"]
+radius = 5.4
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btxrc"]
+radius = 16.0
+height = 38.25
+
+[node name="RigidBody2D" type="RigidBody2D" unique_id=577282496]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1750612613]
+sprite_frames = SubResource("SpriteFrames_yxwtl")
+autoplay = "default"
+frame_progress = 0.2696638
+offset = Vector2(0, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1138708171]
+position = Vector2(0, -5.4)
+shape = SubResource("CircleShape2D_yxwtl")
+
+[node name="HotArea" type="Area2D" parent="." unique_id=1128418567]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HotArea" unique_id=980991705]
+position = Vector2(0, -9.85)
+shape = SubResource("CapsuleShape2D_btxrc")
+debug_color = Color(0.7, 0, 0, 0.16078432)

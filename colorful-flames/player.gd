@@ -6,6 +6,16 @@ const JUMP_VELOCITY = -400.0
 
 @export var accel : int
 
+@onready var fire_scene = preload("res://flames.tscn")
+
+
+func _ready() -> void:
+	var flames = fire_scene.instantiate()
+	flames.position = $FireSpawnPosition.position
+	add_child(flames)
+	var mother = get_parent()
+	flames.reparent.call_deferred(mother)
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
