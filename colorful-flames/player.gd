@@ -7,6 +7,7 @@ const JUMP_VELOCITY = -300.0
 @export var accel : int
 @export var fire_spread_amount : int = 16
 @export var fire_spread_wait : float = 0.2
+@export var fall_velocity_factor : float = 3
 
 var flames_spreading: bool = false
 var coroutine_finished: bool = false
@@ -14,6 +15,7 @@ var fire_spawn_init_position: Vector2
 var fsi: int
 
 @onready var fire_scene = preload("res://flames.tscn")
+@onready var jump_buffer_timer: Timer = $JumpBufferTimer
 
 
 func _ready() -> void:
@@ -33,18 +35,26 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		if velocity.y > 0:
+			velocity += get_gravity() * fall_velocity_factor * delta
+		else:
+			velocity += get_gravity() * delta
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
+	if jump_buffer_timer.time_left > 0:
+		velocity.y = JUMP_VELOCITY
+		jump_buffer_timer.stop()
+	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
-		velocity.x = direction * SPEED
+		#velocity.x = direction * SPEED
 		velocity.x = move_toward(velocity.x, direction * SPEED, accel)
+		#velocity.x = move_toward(velocity.x, direction * MAX_SPEED, accel)
 	else:
 		velocity.x = move_toward(velocity.x, 0, accel)
 
