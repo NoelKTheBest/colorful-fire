@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="2_onrkg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u4nj2"]
 
@@ -33,6 +34,10 @@ shape = SubResource("CircleShape2D_yxwtl")
 
 [node name="FireSpawnPosition" type="Node2D" parent="." unique_id=1357250818]
 position = Vector2(24, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="FireSpawnPosition" unique_id=684057537]
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_onrkg")
 
 [node name="Timer" type="Timer" parent="." unique_id=1016342035]
 one_shot = true
