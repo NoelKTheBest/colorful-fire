@@ -15,6 +15,8 @@ var fire_spawn_init_position: Vector2
 var fire_spawn_origin: Vector2
 var fire_spread_direction: int
 var fsi: int
+var current_main_color := ""
+var secondary_color := ""
 
 @onready var fire_scene = preload("res://flames.tscn")
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
@@ -23,7 +25,11 @@ var fsi: int
 
 func _ready() -> void:
 	fire_spawn_init_position = $FireSpawnPosition.position
-	fire_spawn_origin = $FireSpawnPosition.position
+	fire_spawn_origin = to_global($FireSpawnPosition.position)
+	print($FireSpawnPosition.position)
+	print(to_global($FireSpawnPosition.position))
+	print(fire_spawn_origin)
+	$AnimationTree.active = true
 
 
 func _process(_delta: float) -> void:
@@ -61,11 +67,45 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, accel)
 	
-	fire_spread_direction = -1 if sprite_2d.flip_h else 1
 	$FireSpawnPosition.position.x = -fire_spawn_init_position.x if sprite_2d.flip_h else fire_spawn_init_position.x
-	if $Timer.time_left == 0: fire_spawn_origin = $FireSpawnPosition.position
+	if $Timer.time_left == 0:
+		fire_spawn_origin = to_global($FireSpawnPosition.position)
+		fire_spread_direction = -1 if sprite_2d.flip_h else 1
 
 	move_and_slide()
+
+
+#func _unhandled_input(event: InputEvent) -> void:
+	#pass
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		var key_name = OS.get_keycode_string(event.key_label)
+		print(key_name, "; pressed?: ", event.pressed)
+		
+		match key_name:
+			"Kp 5":
+				current_main_color = "red"
+			"Kp 8":
+				current_main_color = "blue"
+			"Kp 2":
+				current_main_color = "green"
+			"Kp 4":
+				current_main_color = "yellow"
+			"Kp 6":
+				current_main_color = "orange"
+			"Kp 7":
+				current_main_color = "cyan"
+			"Kp 9":
+				current_main_color = "magenta"
+			"Kp 1":
+				current_main_color = "white"
+			"Kp 3":
+				current_main_color = "black"
+		
+		
+	pass
 
 
 func spawn_flames():
@@ -74,12 +114,13 @@ func spawn_flames():
 	var flames = fire_scene.instantiate()
 	flames.position.x = fire_spawn_origin.x + (fsi * fire_spread_amount * fire_spread_direction)
 	flames.position.y = fire_spawn_origin.y
+	print(fire_spawn_origin)
 	add_child(flames)
 	var mother = get_parent()
 	# Defer call since new nodes cannot get added to parent until all child nodes have been accounted for
 	# instantiating a child of this object is easy because the engine starts with the bottom-most children first
 	#flames.reparent.call_deferred(mother)
-	flames.reparent(mother)
+	flames.reparent(mother, false)
 	await get_tree().create_timer(fire_spread_wait).timeout
 	
 	coroutine_finished = true
@@ -90,4 +131,5 @@ func _on_timer_timeout() -> void:
 	flames_spreading = false
 	coroutine_finished = false
 	fsi = 0
-	fire_spawn_origin = $FireSpawnPosition.position
+	fire_spawn_origin = to_global($FireSpawnPosition.position)
+	print(fire_spawn_origin)
