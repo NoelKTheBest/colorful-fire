@@ -10,6 +10,8 @@ size = Vector2(176, 16)
 [node name="Game" type="Node" unique_id=1013110386]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=494391168]
+collision_layer = 4
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_e2o6t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2106961289]
