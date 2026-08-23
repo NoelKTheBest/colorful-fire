@@ -16,10 +16,21 @@ run/main_scene="uid://yjp7qv166kau"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SceneVariables="*uid://t46se4weowtd"
+
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "green",
+"res://fire_fx_v1.0/": "orange"
+}
 
 [input]
 
@@ -79,6 +90,8 @@ set_color_black={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Fire"
 2d_physics/layer_3="Ground"
+2d_physics/layer_4="Player Attack"
+2d_physics/layer_5="Enemy Attack"
 
 [physics]
 

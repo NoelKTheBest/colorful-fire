@@ -73,6 +73,8 @@ func _physics_process(delta: float) -> void:
 		fire_spread_direction = -1 if sprite_2d.flip_h else 1
 
 	move_and_slide()
+	
+	SceneVariables.player_position = position
 
 
 #func _unhandled_input(event: InputEvent) -> void:
