@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://yjp7qv166kau"]
 
-[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="1_80nbo"]
+[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="1_bmn5f"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e2o6t"]
 
@@ -24,5 +24,5 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 position = Vector2(232, 88)
 zoom = Vector2(2.745, 2.745)
 
-[node name="CharacterBody2D" parent="." unique_id=2000016662 instance=ExtResource("1_80nbo")]
+[node name="CharacterBody2D" parent="." unique_id=2000016662 instance=ExtResource("1_bmn5f")]
 position = Vector2(184, 136)

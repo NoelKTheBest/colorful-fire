@@ -1,71 +1,7 @@
 [gd_scene format=3 uid="uid://v64c3nwyqpws"]
 
-[ext_resource type="Texture2D" uid="uid://bfxenleamxlqf" path="res://fire_fx_v1.0/png/orange/loops/burning_loop_1.png" id="1_5l8fu"]
 [ext_resource type="Script" uid="uid://1bdudpfygx4w" path="res://flames.gd" id="1_ryqqn"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kg7va"]
-atlas = ExtResource("1_5l8fu")
-region = Rect2(0, 0, 24, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5l8fu"]
-atlas = ExtResource("1_5l8fu")
-region = Rect2(24, 0, 24, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ryqqn"]
-atlas = ExtResource("1_5l8fu")
-region = Rect2(48, 0, 24, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ybmfv"]
-atlas = ExtResource("1_5l8fu")
-region = Rect2(72, 0, 24, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hw85l"]
-atlas = ExtResource("1_5l8fu")
-region = Rect2(96, 0, 24, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7wkcx"]
-atlas = ExtResource("1_5l8fu")
-region = Rect2(120, 0, 24, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xblig"]
-atlas = ExtResource("1_5l8fu")
-region = Rect2(144, 0, 24, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uc1kp"]
-atlas = ExtResource("1_5l8fu")
-region = Rect2(168, 0, 24, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_yxwtl"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kg7va")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5l8fu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ryqqn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ybmfv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hw85l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7wkcx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xblig")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uc1kp")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 11.0
-}]
+[ext_resource type="PackedScene" uid="uid://cyhw7ebjif3ij" path="res://FLAMES/orange_flames.tscn" id="2_5l8fu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yxwtl"]
 radius = 5.4
@@ -74,23 +10,24 @@ radius = 5.4
 radius = 16.0
 height = 38.25
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u4nj2"]
+radius = 8.0
+height = 25.05
+
 [node name="RigidBody2D" type="RigidBody2D" unique_id=577282496]
 collision_layer = 2
 collision_mask = 4
 lock_rotation = true
 script = ExtResource("1_ryqqn")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1750612613]
-sprite_frames = SubResource("SpriteFrames_yxwtl")
-autoplay = "default"
-frame_progress = 0.2696638
-offset = Vector2(0, -16)
+[node name="OrangeFlames" parent="." unique_id=1128497985 instance=ExtResource("2_5l8fu")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1138708171]
 position = Vector2(0, -5.4)
 shape = SubResource("CircleShape2D_yxwtl")
 
 [node name="HotArea" type="Area2D" parent="." unique_id=1128418567]
+collision_layer = 2
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HotArea" unique_id=980991705]
@@ -99,8 +36,17 @@ shape = SubResource("CapsuleShape2D_btxrc")
 debug_color = Color(0.7, 0, 0, 0.16078432)
 
 [node name="Timer" type="Timer" parent="." unique_id=1670692869]
-wait_time = 1.5
+wait_time = 1.75
 one_shot = true
 autostart = true
+
+[node name="BurnArea" type="Area2D" parent="." unique_id=874133196]
+collision_layer = 2
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BurnArea" unique_id=1504905215]
+position = Vector2(0, -9.895)
+shape = SubResource("CapsuleShape2D_u4nj2")
+debug_color = Color(0.7, 0, 0, 0.41960785)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

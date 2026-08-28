@@ -196,6 +196,12 @@ states/run/position = Vector2(628, 74)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_dw050")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yxwtl"]
+radius = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4nj2"]
+size = Vector2(10.36, 16.63)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxwtl"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=2000016662]
 collision_mask = 4
@@ -220,10 +226,14 @@ tree_root = SubResource("AnimationNodeStateMachine_vosfo")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1588347602]
+[node name="FireInteractArea" type="Area2D" parent="." unique_id=1588347602]
+collision_layer = 0
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1291681798]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireInteractArea" unique_id=1291681798]
+z_index = -1
 shape = SubResource("CircleShape2D_yxwtl")
+debug_color = Color(0.6731906, 0.45145315, 0.62704796, 0.41960785)
 
 [node name="FireSpawnPosition" type="Node2D" parent="." unique_id=1357250818]
 position = Vector2(24, 0)
@@ -240,4 +250,29 @@ process_callback = 0
 wait_time = 0.07
 one_shot = true
 
+[node name="Hurtbox" type="Area2D" parent="." unique_id=627269461]
+collision_layer = 0
+collision_mask = 16
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1623187159]
+shape = SubResource("RectangleShape2D_u4nj2")
+debug_color = Color(0.18990615, 0.64234066, 0, 0.41960785)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=2060197567]
+position = Vector2(32, 0)
+collision_layer = 8
+collision_mask = 32
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=994647933]
+shape = SubResource("RectangleShape2D_yxwtl")
+debug_color = Color(0.98, 0, 0, 0.23529412)
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1735150279]
+polygon = PackedVector2Array(-16, -24, -16, -24, -16, -16, -8, -16, -8, -24)
+
+[connection signal="area_entered" from="FireInteractArea" to="." method="_on_fire_interact_area_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

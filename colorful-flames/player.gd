@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 200.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -400.0
 
 @export var accel : int
 @export var fire_spread_amount : int = 16
@@ -17,6 +17,7 @@ var fire_spread_direction: int
 var fsi: int
 var current_main_color := ""
 var secondary_color := ""
+var close_to_fire
 
 @onready var fire_scene = preload("res://flames.tscn")
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
@@ -60,7 +61,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
+	var direction := Input.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = move_toward(velocity.x, direction * SPEED, accel)
 		sprite_2d.flip_h = true if direction < 0 else false
@@ -75,6 +76,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	SceneVariables.player_position = position
+	
 
 
 #func _unhandled_input(event: InputEvent) -> void:
@@ -83,31 +85,64 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey:
+		if event.is_action_pressed(&'set_color_red'):
+			current_main_color = "red"
+			$Polygon2D.color = Color.DARK_RED
+		elif event.is_action_pressed(&'set_color_blue'):
+			current_main_color = "blue"
+			$Polygon2D.color = Color.BLUE
+		elif event.is_action_pressed(&'set_color_green'):
+			current_main_color = "green"
+			$Polygon2D.color = Color.LIME_GREEN
+		elif event.is_action_pressed(&'set_color_yellow'):
+			current_main_color = "yellow"
+			$Polygon2D.color = Color.YELLOW
+		elif event.is_action_pressed(&'set_color_orange'):
+			current_main_color = "orange"
+			$Polygon2D.color = Color.ORANGE
+		elif event.is_action_pressed(&'set_color_cyan'):
+			current_main_color = "cyan"
+			$Polygon2D.color = Color.CYAN
+		elif event.is_action_pressed(&'set_color_magenta'):
+			current_main_color = "magenta"
+			$Polygon2D.color = Color.MAGENTA
+		elif event.is_action_pressed(&'set_color_white'):
+			current_main_color = "white"
+			$Polygon2D.color = Color.WHITE
+		elif event.is_action_pressed(&'set_color_black'):
+			current_main_color = "black"
+			$Polygon2D.color = Color.BLACK
 		var key_name = OS.get_keycode_string(event.key_label)
 		print(key_name, "; pressed?: ", event.pressed)
 		
 		match key_name:
 			"Kp 5":
 				current_main_color = "red"
+				$Polygon2D.color = Color.DARK_RED
 			"Kp 8":
 				current_main_color = "blue"
+				$Polygon2D.color = Color.BLUE
 			"Kp 2":
 				current_main_color = "green"
+				$Polygon2D.color = Color.LIME_GREEN
 			"Kp 4":
 				current_main_color = "yellow"
+				$Polygon2D.color = Color.YELLOW
 			"Kp 6":
 				current_main_color = "orange"
+				$Polygon2D.color = Color.ORANGE
 			"Kp 7":
 				current_main_color = "cyan"
+				$Polygon2D.color = Color.CYAN
 			"Kp 9":
 				current_main_color = "magenta"
+				$Polygon2D.color = Color.MAGENTA
 			"Kp 1":
 				current_main_color = "white"
+				$Polygon2D.color = Color.WHITE
 			"Kp 3":
 				current_main_color = "black"
-		
-		
-	pass
+				$Polygon2D.color = Color.BLACK
 
 
 func spawn_flames():
@@ -135,3 +170,15 @@ func _on_timer_timeout() -> void:
 	fsi = 0
 	fire_spawn_origin = to_global($FireSpawnPosition.position)
 	print(fire_spawn_origin)
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
+
+
+func _on_fire_interact_area_area_entered(area: Area2D) -> void:
+	print(area)

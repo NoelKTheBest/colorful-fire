@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cdbkwdb7me2t0"]
+
+[ext_resource type="Texture2D" uid="uid://dwoeo512aeiwa" path="res://fire_fx_v1.0/png/white/loops/burning_loop_1.png" id="1_pcf03"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwhpw"]
+atlas = ExtResource("1_pcf03")
+region = Rect2(0, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6jfd"]
+atlas = ExtResource("1_pcf03")
+region = Rect2(24, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bks0c"]
+atlas = ExtResource("1_pcf03")
+region = Rect2(48, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox65g"]
+atlas = ExtResource("1_pcf03")
+region = Rect2(72, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg67h"]
+atlas = ExtResource("1_pcf03")
+region = Rect2(96, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he165"]
+atlas = ExtResource("1_pcf03")
+region = Rect2(120, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpco2"]
+atlas = ExtResource("1_pcf03")
+region = Rect2(144, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6j55k"]
+atlas = ExtResource("1_pcf03")
+region = Rect2(168, 0, 24, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u4nj2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwhpw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6jfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bks0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ox65g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg67h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he165")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpco2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6j55k")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="WhiteFlames" type="AnimatedSprite2D" unique_id=1768657201]
+sprite_frames = SubResource("SpriteFrames_u4nj2")
+autoplay = "default"
+frame_progress = 0.033916354

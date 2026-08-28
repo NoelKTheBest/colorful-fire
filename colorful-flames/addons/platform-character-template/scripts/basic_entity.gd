@@ -14,7 +14,7 @@ const HB_NAME = "Hitbox"
 signal call_for_reinforcements
 
 ## Determines if the entity is currently attacking
-var attacking: bool
+@export var attacking: bool
 ## Determines whether the entity should dodge and oncoming attack
 @export var dodging: bool
 ## For testing purposes, the color to use to show that the entity has been kicked

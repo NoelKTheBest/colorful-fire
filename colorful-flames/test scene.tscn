@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://c8d0b3lweqih0"]
+
+[ext_resource type="Texture2D" uid="uid://ojwb0tqtu7on" path="res://assets/PF_SnowyMountains_1.0/background1.png" id="1_kr2gd"]
+[ext_resource type="Texture2D" uid="uid://ca4q7c0c2cksg" path="res://assets/PF_SnowyMountains_1.0/background2a.png" id="2_tv77q"]
+[ext_resource type="Texture2D" uid="uid://c7g0ig20vltjf" path="res://assets/PF_SnowyMountains_1.0/background2b.png" id="3_ltd8p"]
+[ext_resource type="Texture2D" uid="uid://ckrm0nmfj8l15" path="res://assets/PF_SnowyMountains_1.0/background3.png" id="4_c0706"]
+[ext_resource type="Texture2D" uid="uid://bw0nmv48nu8bq" path="res://assets/PF_SnowyMountains_1.0/background4.png" id="5_aqqmt"]
+[ext_resource type="Texture2D" uid="uid://cqt11k3h5k4l3" path="res://assets/PF_SnowyMountains_1.0/background5.png" id="6_dlcly"]
+[ext_resource type="Texture2D" uid="uid://dwoeo512aeiwa" path="res://fire_fx_v1.0/png/white/loops/burning_loop_1.png" id="7_dlcly"]
+[ext_resource type="PackedScene" uid="uid://crnhiq71ni3pu" path="res://FLAMES/black_flames.tscn" id="7_pwhpw"]
+[ext_resource type="PackedScene" uid="uid://667pe7q0osfb" path="res://FLAMES/yellow_flames.tscn" id="8_m6jfd"]
+[ext_resource type="PackedScene" uid="uid://v64c3nwyqpws" path="res://flames.tscn" id="9_6l0wx"]
+[ext_resource type="PackedScene" uid="uid://b8jxi1trqrpqa" path="res://FLAMES/red_flames.tscn" id="9_bks0c"]
+[ext_resource type="PackedScene" uid="uid://biep5jydh5p53" path="res://FLAMES/cyan_flames.tscn" id="10_ox65g"]
+[ext_resource type="PackedScene" uid="uid://s4iidavmlg33" path="res://FLAMES/blue_flames.tscn" id="12_vg67h"]
+[ext_resource type="PackedScene" uid="uid://b41dp6al5e1wc" path="res://FLAMES/green_flames.tscn" id="14_he165"]
+[ext_resource type="PackedScene" uid="uid://dj87xei1mp4kx" path="res://FLAMES/magenta_flames.tscn" id="15_qpco2"]
+[ext_resource type="PackedScene" uid="uid://cdbkwdb7me2t0" path="res://FLAMES/white_flames.tscn" id="16_6j55k"]
+
+[node name="Node2D" type="Node2D" unique_id=2095490140]
+
+[node name="Background1" type="Sprite2D" parent="." unique_id=1472241631]
+self_modulate = Color(0, 1.5253388, 1.753959, 1)
+position = Vector2(488, 352)
+texture = ExtResource("1_kr2gd")
+
+[node name="Background2a" type="Sprite2D" parent="." unique_id=411846409]
+position = Vector2(488, 352)
+texture = ExtResource("2_tv77q")
+
+[node name="Background2b" type="Sprite2D" parent="." unique_id=979128565]
+position = Vector2(496, 360)
+texture = ExtResource("3_ltd8p")
+
+[node name="Background3" type="Sprite2D" parent="." unique_id=884135030]
+position = Vector2(488, 352)
+texture = ExtResource("4_c0706")
+
+[node name="Background4" type="Sprite2D" parent="." unique_id=331493362]
+position = Vector2(504, 352)
+texture = ExtResource("5_aqqmt")
+
+[node name="Background5" type="Sprite2D" parent="." unique_id=990969636]
+position = Vector2(520, 360)
+texture = ExtResource("6_dlcly")
+
+[node name="BlackFlames" parent="." unique_id=1718295076 instance=ExtResource("7_pwhpw")]
+position = Vector2(1304, 304)
+
+[node name="YellowFlames" parent="." unique_id=1792866445 instance=ExtResource("8_m6jfd")]
+position = Vector2(1344, 280)
+
+[node name="RedFlames" parent="." unique_id=1397788724 instance=ExtResource("9_bks0c")]
+position = Vector2(1388, 280)
+
+[node name="CyanFlames" parent="." unique_id=112594166 instance=ExtResource("10_ox65g")]
+position = Vector2(1432, 304)
+
+[node name="BurningLoop1" type="Sprite2D" parent="." unique_id=657799942]
+visible = false
+self_modulate = Color(0.0792, 0.08622, 0.09, 1)
+position = Vector2(1304, 304)
+texture = ExtResource("7_dlcly")
+
+[node name="BlueFlames" parent="." unique_id=645416307 instance=ExtResource("12_vg67h")]
+position = Vector2(1432, 352)
+
+[node name="RigidBody2D" parent="." unique_id=577282496 instance=ExtResource("9_6l0wx")]
+position = Vector2(1304, 379)
+
+[node name="GreenFlames" parent="." unique_id=353743407 instance=ExtResource("14_he165")]
+position = Vector2(1344, 392)
+
+[node name="MagentaFlames" parent="." unique_id=972767341 instance=ExtResource("15_qpco2")]
+position = Vector2(1392, 392)
+
+[node name="WhiteFlames" parent="." unique_id=1768657201 instance=ExtResource("16_6j55k")]
+position = Vector2(1368, 336)

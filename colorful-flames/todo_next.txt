@@ -1,0 +1,21 @@
+i need to think of a way to make combat interesting using the players abilities.
+I also need to make sure all of her abilities work or at least just the fire 
+spreading mechanic. The enemy scripts don't take knockback into account and 
+don't do damage calc normally. we can save time by simply just giving them a 
+health number saying this is how many times you need to hit the enemy.
+
+We need to make the game look nice or at least have everything come together
+nicely. For the art style I am not really thinking of too much. However, I am
+thinking that it would be cool to do a couple of interesting things such as just
+type more words. Have fire decorations or just have decorations in the level. 
+i like statues and i like gold and diamonds.
+
+since the fire spreading mechanic works well already, it will end up the most
+polished. We can include a block or dodge but it would need to be something really 
+simple. the character's state would need to change as well. and they should only 
+be able to dodge. no no, I think i will take the block away for now. this game is
+not just an exploration of her powers but also how she prefers to fight. the block 
+will still be active in the game, and will still technically be a thing, but it
+will just be a static body. if something gets past it, then oh well... i dont care
+at the end of the day, she would rather dodge. I won't even animate it because it's
+not an important skill for her.
