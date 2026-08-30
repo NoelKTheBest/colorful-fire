@@ -66,7 +66,19 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4nj2"]
+size = Vector2(16, 24)
+
 [node name="MagentaFlames" type="AnimatedSprite2D" unique_id=972767341]
 sprite_frames = SubResource("SpriteFrames_btxrc")
 autoplay = "default"
-frame_progress = 0.53100467
+frame_progress = 0.8654229
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=413914633]
+collision_layer = 0
+collision_mask = 6
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1726826965]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_u4nj2")

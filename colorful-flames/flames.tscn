@@ -18,6 +18,8 @@ height = 25.05
 collision_layer = 2
 collision_mask = 4
 lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_ryqqn")
 
 [node name="OrangeFlames" parent="." unique_id=1128497985 instance=ExtResource("2_5l8fu")]
@@ -26,7 +28,7 @@ script = ExtResource("1_ryqqn")
 position = Vector2(0, -5.4)
 shape = SubResource("CircleShape2D_yxwtl")
 
-[node name="HotArea" type="Area2D" parent="." unique_id=1128418567]
+[node name="HotArea" type="Area2D" parent="." unique_id=1128418567 groups=["Flames"]]
 collision_layer = 2
 monitoring = false
 
@@ -49,4 +51,5 @@ position = Vector2(0, -9.895)
 shape = SubResource("CapsuleShape2D_u4nj2")
 debug_color = Color(0.7, 0, 0, 0.41960785)
 
+[connection signal="body_entered" from="HotArea" to="." method="_on_hot_area_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
