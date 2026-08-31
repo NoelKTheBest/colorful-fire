@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
-const DODGE_VELOCITY = 150
+const DODGE_VELOCITY = 350
 
 @export var accel : int
 @export var fire_spread_amount : int = 16
@@ -237,4 +237,4 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "dodge":
 		dodging = false
 		init_dodge_direction = 0
-		$AnimationPlayer.speed_scale = 1.0
+		$AnimationPlayer.speed_scale = 1.0 

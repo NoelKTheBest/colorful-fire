@@ -372,6 +372,11 @@ _data = {
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1jxqw"]
 animation = &"dodge"
+use_custom_timeline = true
+timeline_length = 0.25
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqtel"]
 animation = &"idle"
