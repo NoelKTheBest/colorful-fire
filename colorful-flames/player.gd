@@ -11,6 +11,7 @@ const DODGE_VELOCITY = 350
 @export var fall_velocity_factor : float = 3
 @export var health = 10
 @export var dodge_speed_boost_init_value = 1.5
+@export var can_advance = false
 
 var flames_spreading: bool = false
 var coroutine_finished: bool = false
@@ -23,6 +24,7 @@ var secondary_color := ""
 var close_to_flames := false
 var dodging := false
 var attacking := false
+var attack_advance:= false
 var blocking := false
 var ability_activated := false
 var dodge_speed_boost : float
