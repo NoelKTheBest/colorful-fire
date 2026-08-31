@@ -1,5 +1,14 @@
 extends RigidBody2D
 
+@export var damage = 40
+@export var damage_boost = 1.2 
+var damage_is_boosted:= false
+var is_key:= false
+var is_enchanted:= false
+var spawn_magenta_flames:= false
+var can_destroy:= false
+# load fire_animated_sprite scenes
+
 #@export var max_speed = 100
 #@export var acceleration = 20
 #var speed : int

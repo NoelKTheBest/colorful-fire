@@ -16,7 +16,8 @@ func _ready() -> void:
 @warning_ignore("unused_parameter")
 ## A function called by the [b]area_entered[/b] signal
 func area_entered_hurtbox(area: Area2D):
-	pass
+	if area.is_in_group("Flames"):
+		print(area.damage)
 
 
 @warning_ignore("unused_parameter")

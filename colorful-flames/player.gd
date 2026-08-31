@@ -28,6 +28,11 @@ var ability_activated := false
 var dodge_speed_boost : float
 var hitbox_init_position : Vector2
 var init_dodge_direction = 0
+var boost_damage:= false
+var set_key:= false
+var set_enchantment:= false
+var spawn_shield:= false
+var set_destroy:= false
 
 @onready var fire_scene = preload("res://flames.tscn")
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
@@ -51,6 +56,21 @@ func _process(_delta: float) -> void:
 		$Timer.start()
 	
 	if flames_spreading and coroutine_finished:
+		match current_main_color:
+			"red":
+				boost_damage = true
+			"blue":
+				boost_damage = true
+			"green":
+				fire_spread_wait = 0.1
+			"yellow":
+				set_key = true
+			"cyan":
+				set_enchantment = true
+			"magenta":
+				spawn_shield = true
+			"black":
+				set_destroy = true
 		spawn_flames()
 	
 	if Input.is_action_just_pressed(&'activate_secondary_ability'):
@@ -90,6 +110,7 @@ func _physics_process(delta: float) -> void:
 		
 		velocity.x = move_toward(velocity.x, direction * SPEED, accel)
 		sprite_2d.flip_h = true if direction < 0 else false
+		$'Sprite2D/Secondary Sprite'.flip_h = true if direction < 0 else false
 	else:
 		if dodging and init_dodge_direction == 0:
 			# set init_dodge_direction to a non zero value
@@ -184,6 +205,11 @@ func spawn_flames():
 	coroutine_finished = false
 	
 	var flames = fire_scene.instantiate()
+	if boost_damage: flames.damage_is_boosted = true
+	if set_key: flames.is_key = true
+	if set_enchantment: flames.is_enchanted = true
+	if spawn_shield: flames.spawn_magenta_flames = true
+	if set_destroy: flames.can_destroy = true
 	flames.position.x = fire_spawn_origin.x + (fsi * fire_spread_amount * fire_spread_direction)
 	flames.position.y = fire_spawn_origin.y
 	print(fire_spawn_origin)
@@ -207,6 +233,12 @@ func _on_timer_timeout() -> void:
 	flames_spreading = false
 	coroutine_finished = false
 	fsi = 0
+	fire_spread_wait = 0.2
+	boost_damage = false
+	set_key = false
+	set_enchantment = false
+	spawn_shield = false
+	set_destroy = false
 	fire_spawn_origin = to_global($FireSpawnPosition.position)
 	print(fire_spawn_origin)
 
