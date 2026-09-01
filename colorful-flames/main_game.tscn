@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://d1qyhhqkfdm08"]
 
 [ext_resource type="Texture2D" uid="uid://dhc44xruiyf36" path="res://assets/SSW_SET6_v1.0/!PNG/Background_day1.png" id="1_4srsv"]
+[ext_resource type="Script" uid="uid://r0gxely327km" path="res://main_game.gd" id="1_krmtw"]
 [ext_resource type="Texture2D" uid="uid://d7xiyq6jyxbo" path="res://assets/SSW_SET6_v1.0/!PNG/dec_rocks_col1.png" id="1_ykeeq"]
 [ext_resource type="Texture2D" uid="uid://bbo41jy1d38yw" path="res://assets/SSW_SET6_v1.0/!PNG/dec_rocks_col2.png" id="2_6bm6p"]
 [ext_resource type="Texture2D" uid="uid://cdiaamc81a57g" path="res://assets/SSW_SET6_v1.0/!PNG/Background_day2.png" id="2_mf81u"]
@@ -10,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://xehk6ult2e5m" path="res://assets/SSW_SET6_v1.0/!PNG/Background_day5.png" id="5_krmtw"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="9_jgkyn"]
 [ext_resource type="PackedScene" uid="uid://bhwlfrc0lflwg" path="res://enemies/ExperimentZ #20/Z20.tscn" id="10_mf81u"]
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="11_aomqu"]
+[ext_resource type="Script" uid="uid://da5j65vi7l1c2" path="res://math.gd" id="12_krmtw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2pltu"]
 texture = ExtResource("1_ykeeq")
@@ -4302,6 +4305,7 @@ physics_layer_0/collision_mask = 3
 sources/2 = SubResource("TileSetAtlasSource_l5ukw")
 
 [node name="Node" type="Node" unique_id=1338135851]
+script = ExtResource("1_krmtw")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=861010928]
 
@@ -4347,3 +4351,24 @@ position_smoothing_enabled = true
 process_mode = 4
 visible = false
 position = Vector2(184, -72)
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=680884208]
+position = Vector2(-3.0517578e-05, 1.9073486e-06)
+scale = Vector2(0.415, 0.415)
+texture = ExtResource("11_aomqu")
+script = ExtResource("12_krmtw")
+a = 70
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=209939500]
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1030532958]
+position = Vector2(160, -136)
+
+[node name="Node2D2" type="Node2D" parent="." unique_id=540046704]
+position = Vector2(-440, -616)
+
+[node name="Node2D3" type="Node2D" parent="." unique_id=1732014065]
+position = Vector2(712, 488)
+
+[node name="Node2D4" type="Node2D" parent="." unique_id=592565207]
+position = Vector2(-176, 96)
