@@ -1,13 +1,22 @@
-extends Sprite2D
+extends Area2D
 
 @export var a = 0
 @export var vector: Vector2
 @export var multiplier = 25
 @export var m: float = 1
 @export var r: float = 5
+@export var circle_center: Vector2
 var time = 0.0
 var x_offset
 var y_offset
+
+var set_quadratic
+var set_cubic
+var set_linear
+var set_wave
+## for use with wave and linear functions only
+var set_horizontal_speed
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,29 +26,33 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(_delta: float) -> void:
-	#position.x = vector.y * multiplier + x_offset
-	#position.y = cos(vector.x) * multiplier + y_offset
-	#position.y = sin(vector.x) * multiplier
+func _process(delta: float) -> void:
 	#position.y = tan(vector.x) * multiplier
-	#position.y = slope(m, vector.x, 0) * multiplier
+	#position.y = sin(vector.x) * multiplier
 	#position = circle(r) - not working
-	#position = _quadratic_bezier($'../Node2D'.position, $'../Node2D2'.position, $'../Node2D3'.position, time)
 	#position.y = log(vector.x) / log(10)
-	#position = _cubic_bezier($'../Node2D'.position, $'../Node2D2'.position, $'../Node2D3'.position, $'../Node2D4'.position, time)
-	#
-	#time += 0.01
-	#time = clamp(time, 0.0, 1.0)
-	#vector.x += 0.1
-	#vector.y += 0.1
+	
+	if set_wave:
+		position.x = vector.y * multiplier + x_offset
+		position.y = cos(vector.x) * multiplier + y_offset
+	
+	if set_linear:
+		position.x = vector.y * multiplier + x_offset
+		position.y = slope(m, vector.x, 0) * multiplier
+	
+	if set_quadratic:
+		position = _quadratic_bezier($'../Node2D'.position, $'../Node2D2'.position, $'../Node2D3'.position, time)
+	
+	if set_cubic:
+		position = _cubic_bezier($'../Node2D'.position, $'../Node2D2'.position, $'../Node2D3'.position, $'../Node2D4'.position, time)
 
 
-func slope(m: float, time: float, b: float):
-	return (m * time) + b
+func slope(mm: float, ttime: float, b: float):
+	return (mm * ttime) + b
 
 
-
-func circle(radius: float):
+func circle(radius: float, center_x: float, center_y: float, current_x: float):
+	return 2 + sqrt(radius - pow(current_x - center_x, 2.0))
 	var x = radius - (vector.y - y_offset) + x_offset
 	var y = radius - (vector.x - x_offset) + y_offset
 	return Vector2(x, y)

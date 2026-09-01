@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ckudr8chj1kgo"]
 
 [ext_resource type="Script" uid="uid://80kl10p8d3vr" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Shader" uid="uid://j2vmk8f6q8if" path="res://player.gdshader" id="2_dw050"]
 [ext_resource type="Texture2D" uid="uid://m5y5cb5ytw5" path="res://player for colorful fire-Sheet.png" id="2_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="2_onrkg"]
 [ext_resource type="Texture2D" uid="uid://biv63f6o5vahj" path="res://fire_fx_v1.0/png/white/start/burning_start_2.png" id="3_1jxqw"]
@@ -9,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://bmf6x1p43sb6g" path="res://fire_fx_v1.0/png/white/end/burning_end_2.png" id="5_b26j0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u4nj2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qpaub"]
+shader = ExtResource("2_dw050")
+shader_parameter/make_white = false
 
 [sub_resource type="Animation" id="Animation_hqtel"]
 length = 0.001
@@ -127,6 +132,18 @@ tracks/9/path = NodePath("Secondary Sprite:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".:material:shader_parameter/make_white")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -266,6 +283,21 @@ tracks/9/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_nvl01"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/make_white")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666665, 0.40000004, 0.53333336, 0.66666675),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false]
+}
+
 [sub_resource type="Animation" id="Animation_2hs0m"]
 resource_name = "idle"
 loop_mode = 1
@@ -378,6 +410,7 @@ _data = {
 &"attack_2": SubResource("Animation_dw050"),
 &"attack_3": SubResource("Animation_b26j0"),
 &"dodge": SubResource("Animation_n7ghd"),
+&"hit": SubResource("Animation_nvl01"),
 &"idle": SubResource("Animation_2hs0m"),
 &"run": SubResource("Animation_sweqy")
 }
@@ -399,6 +432,9 @@ stretch_time_scale = true
 start_offset = 0.0
 loop_mode = 0
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dw050"]
+animation = &"hit"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqtel"]
 animation = &"idle"
 
@@ -414,7 +450,7 @@ advance_expression = "velocity.x != 0 or dodging"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dw050"]
 advance_mode = 2
-advance_expression = "velocity.x == 0"
+advance_expression = "velocity.x == 0 or was_hit"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b26j0"]
 advance_mode = 2
@@ -454,6 +490,22 @@ advance_expression = "!attack_advance"
 advance_mode = 2
 advance_expression = "attack_advance"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nvl01"]
+advance_mode = 2
+advance_expression = "was_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ivps1"]
+advance_mode = 2
+advance_expression = "was_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pbfsw"]
+advance_mode = 2
+advance_expression = "was_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5tmop"]
+advance_mode = 2
+advance_expression = "was_hit"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vosfo"]
 states/Start/position = Vector2(48, -30)
 states/attack_1/node = SubResource("AnimationNodeAnimation_n7ghd")
@@ -461,15 +513,17 @@ states/attack_1/position = Vector2(185, 143)
 states/attack_2/node = SubResource("AnimationNodeAnimation_nvl01")
 states/attack_2/position = Vector2(260, 246)
 states/attack_3/node = SubResource("AnimationNodeAnimation_ivps1")
-states/attack_3/position = Vector2(399, 308)
+states/attack_3/position = Vector2(360, 352)
 states/dodge/node = SubResource("AnimationNodeAnimation_1jxqw")
-states/dodge/position = Vector2(566, 308)
+states/dodge/position = Vector2(566, 352)
+states/hit/node = SubResource("AnimationNodeAnimation_dw050")
+states/hit/position = Vector2(48, 296)
 states/idle/node = SubResource("AnimationNodeAnimation_hqtel")
 states/idle/position = Vector2(185, -30)
 states/run/node = SubResource("AnimationNodeAnimation_sweqy")
 states/run/position = Vector2(566, -30)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "run", "dodge", SubResource("AnimationNodeStateMachineTransition_b26j0"), "dodge", "run", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "idle", "attack_1", SubResource("AnimationNodeStateMachineTransition_urp6f"), "attack_1", "attack_2", SubResource("AnimationNodeStateMachineTransition_bwjto"), "attack_3", "run", SubResource("AnimationNodeStateMachineTransition_606se"), "run", "attack_1", SubResource("AnimationNodeStateMachineTransition_u1c27"), "attack_1", "run", SubResource("AnimationNodeStateMachineTransition_op7ga"), "attack_2", "run", SubResource("AnimationNodeStateMachineTransition_q13i1"), "attack_2", "attack_3", SubResource("AnimationNodeStateMachineTransition_pylmc")]
-graph_offset = Vector2(-196, -45)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "run", "dodge", SubResource("AnimationNodeStateMachineTransition_b26j0"), "dodge", "run", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "idle", "attack_1", SubResource("AnimationNodeStateMachineTransition_urp6f"), "attack_1", "attack_2", SubResource("AnimationNodeStateMachineTransition_bwjto"), "attack_3", "run", SubResource("AnimationNodeStateMachineTransition_606se"), "run", "attack_1", SubResource("AnimationNodeStateMachineTransition_u1c27"), "attack_1", "run", SubResource("AnimationNodeStateMachineTransition_op7ga"), "attack_2", "run", SubResource("AnimationNodeStateMachineTransition_q13i1"), "attack_2", "attack_3", SubResource("AnimationNodeStateMachineTransition_pylmc"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_nvl01"), "attack_1", "hit", SubResource("AnimationNodeStateMachineTransition_ivps1"), "attack_2", "hit", SubResource("AnimationNodeStateMachineTransition_pbfsw"), "attack_3", "hit", SubResource("AnimationNodeStateMachineTransition_5tmop")]
+graph_offset = Vector2(-277, -55)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yxwtl"]
 radius = 24.0
@@ -480,7 +534,8 @@ size = Vector2(10.36, 16.63)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxwtl"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=2000016662 groups=["Player"]]
-collision_mask = 4
+z_index = 2
+collision_mask = 772
 script = ExtResource("1_4flbx")
 accel = 20
 
@@ -488,6 +543,7 @@ accel = 20
 shape = SubResource("CapsuleShape2D_u4nj2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=409545675]
+material = SubResource("ShaderMaterial_qpaub")
 texture = ExtResource("2_i3pqv")
 hframes = 8
 
@@ -555,9 +611,14 @@ debug_color = Color(0.98, 0, 0, 0.23529412)
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1735150279]
 polygon = PackedVector2Array(-16, -24, -16, -24, -16, -16, -8, -16, -8, -24)
 
+[node name="DropthroughCancelTimer" type="Timer" parent="." unique_id=796188734]
+wait_time = 0.25
+one_shot = true
+
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="FireInteractArea" to="." method="_on_fire_interact_area_area_entered"]
 [connection signal="area_exited" from="FireInteractArea" to="." method="_on_fire_interact_area_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="DropthroughCancelTimer" to="." method="_on_dropthrough_cancel_timer_timeout"]

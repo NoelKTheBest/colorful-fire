@@ -36,6 +36,10 @@ var set_enchantment:= false
 var spawn_shield:= false
 var set_destroy:= false
 
+var falling_through = false
+var was_hit:= false
+
+
 @onready var fire_scene = preload("res://flames.tscn")
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -87,9 +91,25 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity += get_gravity() * delta
 
+	if is_on_floor():
+		set_collision_mask_value(3, true)
+
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed(&"jump") and is_on_floor() and !Input.is_action_pressed(&"move_down"):
 		velocity.y = JUMP_VELOCITY
+		set_collision_mask_value(3, false)
+		print("a")
+	
+	# Drop Through Platform
+	if Input.is_action_just_pressed(&"jump") and is_on_floor() and Input.is_action_pressed(&"move_down"):
+		set_collision_mask_value(3, false)
+		falling_through = true
+		$DropthroughCancelTimer.start()
+		print("b")
+	
+	if velocity.y > 0 and !Input.is_action_pressed(&"move_down") and !falling_through:
+		set_collision_mask_value(3, true)
+		print("c")
 
 	if jump_buffer_timer.time_left > 0:
 		velocity.y = JUMP_VELOCITY
@@ -272,3 +292,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 		dodging = false
 		init_dodge_direction = 0
 		$AnimationPlayer.speed_scale = 1.0 
+
+
+func _on_dropthrough_cancel_timer_timeout() -> void:
+	falling_through = false
