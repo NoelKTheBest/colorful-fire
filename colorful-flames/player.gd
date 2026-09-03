@@ -12,6 +12,7 @@ const DODGE_VELOCITY = 350
 @export var health = 10
 @export var dodge_speed_boost_init_value = 1.5
 @export var can_advance = false
+@export var pivot_inc: float
 
 var flames_spreading: bool = false
 var coroutine_finished: bool = false
@@ -61,6 +62,9 @@ func _process(_delta: float) -> void:
 		coroutine_finished = true
 		$Timer.start()
 	
+	if Input.is_action_just_pressed(&'attack'):
+		print("attack")
+	
 	if flames_spreading and coroutine_finished:
 		match current_main_color:
 			"red":
@@ -81,6 +85,9 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed(&'activate_secondary_ability'):
 		ability_activated = true
+	
+	sprite_2d.position.x = sprite_2d.position.x - pivot_inc if sprite_2d.flip_h else sprite_2d.position.x + pivot_inc
+	sprite_2d.position.y = -8.0 if attacking else 0.0
 
 
 func _physics_process(delta: float) -> void:
@@ -98,18 +105,15 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(&"jump") and is_on_floor() and !Input.is_action_pressed(&"move_down"):
 		velocity.y = JUMP_VELOCITY
 		set_collision_mask_value(3, false)
-		print("a")
 	
 	# Drop Through Platform
 	if Input.is_action_just_pressed(&"jump") and is_on_floor() and Input.is_action_pressed(&"move_down"):
 		set_collision_mask_value(3, false)
 		falling_through = true
 		$DropthroughCancelTimer.start()
-		print("b")
 	
 	if velocity.y > 0 and !Input.is_action_pressed(&"move_down") and !falling_through:
 		set_collision_mask_value(3, true)
-		print("c")
 
 	if jump_buffer_timer.time_left > 0:
 		velocity.y = JUMP_VELOCITY
