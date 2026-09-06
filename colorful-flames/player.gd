@@ -39,6 +39,7 @@ var set_destroy:= false
 
 var falling_through = false
 var was_hit:= false
+var sprite_init_position
 
 
 @onready var fire_scene = preload("res://flames.tscn")
@@ -54,6 +55,7 @@ func _ready() -> void:
 	print(fire_spawn_origin)
 	$AnimationTree.active = true
 	hitbox_init_position = $Hitbox.position
+	sprite_init_position = sprite_2d.position
 
 
 func _process(_delta: float) -> void:
@@ -63,7 +65,7 @@ func _process(_delta: float) -> void:
 		$Timer.start()
 	
 	if Input.is_action_just_pressed(&'attack'):
-		print("attack")
+		attacking = true
 	
 	if flames_spreading and coroutine_finished:
 		match current_main_color:
@@ -86,7 +88,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(&'activate_secondary_ability'):
 		ability_activated = true
 	
-	sprite_2d.position.x = sprite_2d.position.x - pivot_inc if sprite_2d.flip_h else sprite_2d.position.x + pivot_inc
+	sprite_2d.position.x = sprite_init_position.x - pivot_inc if sprite_2d.flip_h else sprite_init_position.x + pivot_inc
 	sprite_2d.position.y = -8.0 if attacking else 0.0
 
 

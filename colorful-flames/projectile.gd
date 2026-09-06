@@ -16,7 +16,7 @@ var set_linear
 var set_wave
 ## for use with wave and linear functions only
 var set_horizontal_speed
-
+var set_flames
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,6 +32,8 @@ func _process(delta: float) -> void:
 	#position = circle(r) - not working
 	#position.y = log(vector.x) / log(10)
 	
+	if set_flames: $BlueFlames.visible = true
+	
 	if set_wave:
 		position.x = vector.y * multiplier + x_offset
 		position.y = cos(vector.x) * multiplier + y_offset
@@ -45,6 +47,14 @@ func _process(delta: float) -> void:
 	
 	if set_cubic:
 		position = _cubic_bezier($'../Node2D'.position, $'../Node2D2'.position, $'../Node2D3'.position, $'../Node2D4'.position, time)
+	
+	if set_wave or set_linear:
+		vector.x += 0.1
+		vector.y += 0.1
+	
+	if set_quadratic or set_cubic:
+		time += 0.01
+		time = clamp(time, 0.0, 1.0)
 
 
 func slope(mm: float, ttime: float, b: float):

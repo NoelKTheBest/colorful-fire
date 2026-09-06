@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://xehk6ult2e5m" path="res://assets/SSW_SET6_v1.0/!PNG/Background_day5.png" id="5_krmtw"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="9_jgkyn"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="11_aomqu"]
+[ext_resource type="AudioStream" uid="uid://b7eyg84hhrppr" path="res://music and sound/OC Main Theme.ogg" id="11_jgkyn"]
 [ext_resource type="Script" uid="uid://da5j65vi7l1c2" path="res://math.gd" id="12_krmtw"]
 [ext_resource type="PackedScene" uid="uid://dd5li6uxquwjg" path="res://enemies/ExperimentZ #20/boss.tscn" id="13_krmtw"]
 
@@ -4613,6 +4614,21 @@ physics_layer_0/collision_layer = 256
 physics_layer_0/collision_mask = 35
 sources/2 = SubResource("TileSetAtlasSource_l5ukw")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7ghd"]
+bg_color = Color(0.20730008, 0.13800001, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvl01"]
+bg_color = Color(0.1847311, 0.64192635, 0.8890664, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 2
+corner_detail = 13
+
+[sub_resource type="Theme" id="Theme_b26j0"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_n7ghd")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_nvl01")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4nj2"]
 size = Vector2(20, 504)
 
@@ -4639,20 +4655,32 @@ texture = ExtResource("2_mf81u")
 
 [node name="Parallax2D3" type="Parallax2D" parent="." unique_id=1849550359]
 scroll_scale = Vector2(0.6, 1)
-repeat_size = Vector2(1280, 0)
-repeat_times = 3
 
 [node name="BackgroundDay3" type="Sprite2D" parent="Parallax2D3" unique_id=349050767]
 position = Vector2(-64, -120)
 texture = ExtResource("3_02kkc")
 
+[node name="BackgroundDay4" type="Sprite2D" parent="Parallax2D3" unique_id=1524622789]
+position = Vector2(888, -8)
+texture = ExtResource("3_02kkc")
+
+[node name="BackgroundDay5" type="Sprite2D" parent="Parallax2D3" unique_id=115442091]
+position = Vector2(-1296, 24)
+texture = ExtResource("3_02kkc")
+
 [node name="Parallax2D4" type="Parallax2D" parent="." unique_id=1349292567]
 scroll_scale = Vector2(0.8, 1)
-repeat_size = Vector2(1280, 0)
-repeat_times = 3
 
 [node name="BackgroundDay4" type="Sprite2D" parent="Parallax2D4" unique_id=831804794]
-position = Vector2(-64, -190)
+position = Vector2(-56, -104)
+texture = ExtResource("4_aomqu")
+
+[node name="BackgroundDay5" type="Sprite2D" parent="Parallax2D4" unique_id=1232371389]
+position = Vector2(1032, 16)
+texture = ExtResource("4_aomqu")
+
+[node name="BackgroundDay6" type="Sprite2D" parent="Parallax2D4" unique_id=1457696037]
+position = Vector2(-1304, -40)
 texture = ExtResource("4_aomqu")
 
 [node name="Parallax2D5" type="Parallax2D" parent="." unique_id=1703332111]
@@ -4686,6 +4714,17 @@ tile_set = SubResource("TileSet_u4nj2")
 position = Vector2(-144, -48)
 fall_velocity_factor = 2.03
 
+[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D" unique_id=1918431065]
+
+[node name="ProgressBar" type="ProgressBar" parent="CharacterBody2D/CanvasLayer" unique_id=622747005]
+offset_left = -368.0
+offset_top = 24.0
+offset_right = -264.0
+offset_bottom = 51.0
+theme = SubResource("Theme_b26j0")
+value = 100.0
+show_percentage = false
+
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1210073305]
 offset = Vector2(0, -27.66)
 zoom = Vector2(2.52, 2.52)
@@ -4693,6 +4732,11 @@ limit_left = -512
 limit_right = 576
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D" unique_id=1943286930]
+stream = ExtResource("11_jgkyn")
+volume_db = -13.922
+autoplay = true
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=680884208]
 position = Vector2(-95.99999, 71.99999)

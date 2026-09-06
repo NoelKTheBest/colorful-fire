@@ -33,7 +33,8 @@ folder_colors={
 "res://assets/": "blue",
 "res://enemies/": "yellow",
 "res://enemies/projectiles/": "teal",
-"res://fire_fx_v1.0/": "orange"
+"res://fire_fx_v1.0/": "orange",
+"res://music and sound/": "purple"
 }
 
 [global_group]
@@ -157,6 +158,7 @@ attack={
 2d_physics/layer_8="Burning Area"
 2d_physics/layer_9="Bedrock"
 2d_physics/layer_10="Purple Walls"
+2d_physics/layer_11="Boss Shield"
 
 [physics]
 

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://uyf48mmgbpbw" path="res://enemies/ExperimentZ #20/death.png" id="3_csgn7"]
 [ext_resource type="Script" uid="uid://bqeoiq20yscbo" path="res://enemies/ExperimentZ #20/boss.gd" id="4_t6wuw"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="5_vtqod"]
+[ext_resource type="Script" uid="uid://q7aptg4s817o" path="res://enemies/ExperimentZ #20/player_barrier.gd" id="6_csgn7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n0d1c"]
 atlas = ExtResource("1_3g0bo")
@@ -269,6 +270,15 @@ animations = [{
 "speed": 11.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4nj2"]
+size = Vector2(56, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vosfo"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u4nj2"]
+radius = 80.0
+
 [node name="Boss" type="AnimatedSprite2D" unique_id=1277332470]
 sprite_frames = SubResource("SpriteFrames_u4nj2")
 animation = &"attack"
@@ -317,6 +327,37 @@ metadata/_edit_group_ = true
 scale = Vector2(0.06, 0.06)
 texture = ExtResource("5_vtqod")
 
+[node name="Hurtbox" type="Area2D" parent="." unique_id=2073349610]
+collision_layer = 32
+collision_mask = 138
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=167959479]
+position = Vector2(4, 24)
+shape = SubResource("RectangleShape2D_u4nj2")
+debug_color = Color(0.31913564, 0.6254762, 1.92523e-07, 0.41960785)
+
+[node name="Shield" type="Area2D" parent="." unique_id=561425649]
+collision_layer = 0
+collision_mask = 138
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield" unique_id=848586419]
+shape = SubResource("CircleShape2D_vosfo")
+
+[node name="PlayerBarrier" type="StaticBody2D" parent="." unique_id=771050345]
+process_mode = 4
+visible = false
+collision_layer = 1024
+script = ExtResource("6_csgn7")
+radius = 79.185
+width = 2.14
+color = Color(0.19999999, 0.6, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBarrier" unique_id=49214703]
+shape = SubResource("CircleShape2D_u4nj2")
+debug_color = Color(0, 0.5500022, 0.90965307, 0)
+
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ProjectileWait" to="." method="_on_projectile_wait_timeout"]
+[connection signal="area_entered" from="Shield" to="." method="_on_shield_area_entered"]
+[connection signal="body_entered" from="Shield" to="." method="_on_shield_body_entered"]

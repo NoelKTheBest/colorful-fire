@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b7eyg84hhrppr"
+path="res://.godot/imported/OC Main Theme.ogg-98598eb2430e249d383488c82c56e049.oggvorbisstr"
+
+[deps]
+
+source_file="res://music and sound/OC Main Theme.ogg"
+dest_files=["res://.godot/imported/OC Main Theme.ogg-98598eb2430e249d383488c82c56e049.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

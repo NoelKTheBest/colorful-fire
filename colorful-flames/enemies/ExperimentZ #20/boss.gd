@@ -2,12 +2,15 @@ extends AnimatedSprite2D
 
 var attacking = false
 var projectile = preload('res://projectile.gd')
+var positions = []
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	positions = get_tree().get_nodes_in_group("Position Marker")
+	
 	if OS.is_debug_build():
-		for pm in get_tree().get_nodes_in_group("Position Marker"):
+		for pm in positions:
 			pm.visible = false
 
 
@@ -27,4 +30,15 @@ func _on_attack_timer_timeout() -> void:
 
 func _on_projectile_wait_timeout() -> void:
 	var new_orb = projectile.new()
-	new_orb.position
+	new_orb.position = positions[0].position
+	new_orb.set_linear = true
+	new_orb.m = 4
+	new_orb.reparent(get_parent())
+
+
+func _on_shield_area_entered(area: Area2D) -> void:
+	area.queue_free()
+
+
+func _on_shield_body_entered(body: Node2D) -> void:
+	body.queue_free()

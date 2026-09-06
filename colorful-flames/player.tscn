@@ -165,7 +165,7 @@ tracks/11/keys = {
 
 [sub_resource type="Animation" id="Animation_1jxqw"]
 resource_name = "attack_1"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -229,7 +229,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_dw050"]
 resource_name = "attack_2"
-length = 0.23329999999999998
+length = 0.2333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -496,7 +496,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_2hs0m"]
 resource_name = "idle"
-length = 0.39999999999999997
+length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -667,7 +667,7 @@ advance_expression = "velocity.x != 0 or dodging"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dw050"]
 advance_mode = 2
-advance_expression = "velocity.x == 0 or was_hit"
+advance_expression = "velocity.x == 0 or was_hit or attacking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b26j0"]
 advance_mode = 2
@@ -740,7 +740,7 @@ states/idle/position = Vector2(185, -30)
 states/run/node = SubResource("AnimationNodeAnimation_sweqy")
 states/run/position = Vector2(566, -30)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "run", "dodge", SubResource("AnimationNodeStateMachineTransition_b26j0"), "dodge", "run", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "idle", "attack_1", SubResource("AnimationNodeStateMachineTransition_urp6f"), "attack_1", "attack_2", SubResource("AnimationNodeStateMachineTransition_bwjto"), "attack_3", "run", SubResource("AnimationNodeStateMachineTransition_606se"), "run", "attack_1", SubResource("AnimationNodeStateMachineTransition_u1c27"), "attack_1", "run", SubResource("AnimationNodeStateMachineTransition_op7ga"), "attack_2", "run", SubResource("AnimationNodeStateMachineTransition_q13i1"), "attack_2", "attack_3", SubResource("AnimationNodeStateMachineTransition_pylmc"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_nvl01"), "attack_1", "hit", SubResource("AnimationNodeStateMachineTransition_ivps1"), "attack_2", "hit", SubResource("AnimationNodeStateMachineTransition_pbfsw"), "attack_3", "hit", SubResource("AnimationNodeStateMachineTransition_5tmop")]
-graph_offset = Vector2(8, 201)
+graph_offset = Vector2(-234, -99)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yxwtl"]
 radius = 24.0
@@ -752,7 +752,7 @@ size = Vector2(10.36, 16.63)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=2000016662 groups=["Player"]]
 z_index = 2
-collision_mask = 772
+collision_mask = 1796
 script = ExtResource("1_4flbx")
 accel = 20
 
