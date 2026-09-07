@@ -870,6 +870,7 @@ limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="Icon" type="Sprite2D" parent="Camera2D" unique_id=924588381]
+visible = false
 position = Vector2(204, 52)
 scale = Vector2(0.1875, 0.4375)
 texture = ExtResource("2_onrkg")
