@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m5y5cb5ytw5"
-path="res://.godot/imported/player for colorful fire-Sheet.png-e973bb6fb878afed0e43c250a8068876.ctex"
+uid="uid://h1t23p3137xc"
+path="res://.godot/imported/Nina-Fall.png-d63fd66089021574abfa7fa97bd4712a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player for colorful fire-Sheet.png"
-dest_files=["res://.godot/imported/player for colorful fire-Sheet.png-e973bb6fb878afed0e43c250a8068876.ctex"]
+source_file="res://nina/Nina-Fall.png"
+dest_files=["res://.godot/imported/Nina-Fall.png-d63fd66089021574abfa7fa97bd4712a.ctex"]
 
 [params]
 

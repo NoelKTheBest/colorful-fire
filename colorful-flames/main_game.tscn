@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d1g44bvmj34i5" path="res://assets/SSW_SET6_v1.0/!PNG/MainLevBuild.png" id="3_dugkq"]
 [ext_resource type="Texture2D" uid="uid://cfeqeavppdw1j" path="res://assets/SSW_SET6_v1.0/!PNG/Background_day4.png" id="4_aomqu"]
 [ext_resource type="Texture2D" uid="uid://xehk6ult2e5m" path="res://assets/SSW_SET6_v1.0/!PNG/Background_day5.png" id="5_krmtw"]
-[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="9_jgkyn"]
+[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://nina/player.tscn" id="9_jgkyn"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="11_aomqu"]
 [ext_resource type="AudioStream" uid="uid://b7eyg84hhrppr" path="res://music and sound/OC Main Theme.ogg" id="11_jgkyn"]
 [ext_resource type="Script" uid="uid://da5j65vi7l1c2" path="res://math.gd" id="12_krmtw"]
@@ -4642,10 +4642,12 @@ texture = ExtResource("2_mf81u")
 scroll_scale = Vector2(0.6, 1)
 
 [node name="BackgroundDay3" type="Sprite2D" parent="Parallax2D3" unique_id=349050767]
+self_modulate = Color(0.25490198, 0.43137255, 0.4509804, 0.7411765)
 position = Vector2(-64, -120)
 texture = ExtResource("3_02kkc")
 
 [node name="BackgroundDay4" type="Sprite2D" parent="Parallax2D3" unique_id=1524622789]
+self_modulate = Color(0.23921569, 0.47843137, 0.56078434, 0.6431373)
 position = Vector2(888, -8)
 texture = ExtResource("3_02kkc")
 
@@ -4657,6 +4659,7 @@ texture = ExtResource("3_02kkc")
 scroll_scale = Vector2(0.8, 1)
 
 [node name="BackgroundDay4" type="Sprite2D" parent="Parallax2D4" unique_id=831804794]
+self_modulate = Color(0.23921569, 0.47843137, 0.56078434, 1)
 position = Vector2(-56, -104)
 texture = ExtResource("4_aomqu")
 
@@ -4688,7 +4691,7 @@ tile_map_data = PackedByteArray("AAD7//z/AgAAAAYAAAD7//3/AgAAAAcAAAD7//7/AgAAAAg
 tile_set = SubResource("TileSet_yxwtl")
 
 [node name="TileMapLayer3" type="TileMapLayer" parent="." unique_id=240317086]
-tile_map_data = PackedByteArray("AAD+//z/AQAOAAAAAAD+//3/AQAOAAEAAAD///z/AQAPAAAAAAD///3/AQAPAAEAAAAAAPz/AQAQAAAAAAAAAP3/AQAQAAEAAAABAPz/AQAQAAAAAAABAP3/AQAQAAEAAAACAPz/AQARAAAAAAACAP3/AQARAAEAAAADAPz/AQASAAAAAAADAP3/AQASAAEAAAA=")
+tile_map_data = PackedByteArray("AAD+//z/AQAOAAAAAAD+//3/AQAOAAEAAAD///z/AQAPAAAAAAD///3/AQAPAAEAAAAAAPz/AQAQAAAAAAAAAP3/AQAQAAEAAAABAPz/AQAQAAAAAAABAP3/AQAQAAEAAAACAPz/AQARAAAAAAACAP3/AQARAAEAAAADAPz/AQASAAAAAAADAP3/AQASAAEAAAABAPv/AQAOAAEAAAACAPv/AQAPAAEAAAADAPv/AQAQAAEAAAAEAPv/AQARAAEAAAAFAPv/AQASAAEAAAA=")
 tile_set = SubResource("TileSet_vosfo")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=234422062 groups=["Ground"]]
@@ -4696,7 +4699,7 @@ tile_map_data = PackedByteArray("AAAAAP//AgABAAcAAAD/////AgAAAAcAAAABAP//AgACAAc
 tile_set = SubResource("TileSet_u4nj2")
 
 [node name="CharacterBody2D" parent="." unique_id=2000016662 instance=ExtResource("9_jgkyn")]
-position = Vector2(128, -120)
+position = Vector2(168, -176)
 fall_velocity_factor = 2.03
 metadata/_edit_group_ = true
 
@@ -4728,7 +4731,6 @@ position = Vector2(712, 488)
 position = Vector2(-176, 96)
 
 [node name="Boss" parent="." unique_id=1277332470 instance=ExtResource("13_krmtw")]
-process_mode = 4
 position = Vector2(288, -88)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=272266653]

@@ -14,6 +14,7 @@ const DODGE_VELOCITY = 350
 @export var can_advance = false
 @export var pivot_inc: float
 @export var window_open := false
+@export var hitbox_pos_x = 0.0
 
 var flames_spreading: bool = false
 var coroutine_finished: bool = false
@@ -30,7 +31,7 @@ var attack_advance:= false
 var blocking := false
 var ability_activated := false
 var dodge_speed_boost : float
-var hitbox_init_position : Vector2
+var hitbox_current_x : float
 var init_dodge_direction = 0
 var boost_damage:= false
 var set_key:= false
@@ -56,9 +57,12 @@ func _ready() -> void:
 	#print(to_global($FireSpawnPosition.position))
 	#print(fire_spawn_origin)
 	$AnimationTree.active = true
-	hitbox_init_position = $Hitbox.position
+	#hitbox_init_position = $Hitbox.position
 	sprite_init_position = sprite_2d.position
 	get_tree().process_frame.connect(reset_sprite_pos)
+	$CanvasLayer/ProgressBar.max_value = health
+	$Hurtbox.can_signal_again = true
+	$Hitbox.can_signal_again = true
 
 
 func _process(_delta: float) -> void:
@@ -101,11 +105,14 @@ func _process(_delta: float) -> void:
 		ability_activated = true
 	
 	$Icon.visible = true if window_open else false
+	$CanvasLayer/ProgressBar.value = health
 	
 	#if !attacking and combo_count == 0: sprite_2d.position.y = -8.0
 
 
 func _physics_process(delta: float) -> void:
+	hitbox_current_x = hitbox_pos_x
+	
 	# Add the gravity.
 	if not is_on_floor():
 		if velocity.y > 0:
@@ -164,7 +171,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = DODGE_VELOCITY * init_dodge_direction
 	
 	$FireSpawnPosition.position.x = -fire_spawn_init_position.x if sprite_2d.flip_h else fire_spawn_init_position.x
-	$Hitbox.position.x = -hitbox_init_position.x if sprite_2d.flip_h else hitbox_init_position.x
+	$Hitbox.position.x = -hitbox_current_x if sprite_2d.flip_h else hitbox_current_x
 	
 	if $Timer.time_left == 0:
 		fire_spawn_origin = to_global($FireSpawnPosition.position)
@@ -284,18 +291,6 @@ func _on_timer_timeout() -> void:
 	print(fire_spawn_origin)
 
 
-func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if !dodging:
-		health -= 1
-	
-	if health <= 0:
-		die()
-
-
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.
-
-
 func _on_fire_interact_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Flames"):
 		close_to_flames = true
@@ -307,7 +302,7 @@ func _on_fire_interact_area_area_exited(area: Area2D) -> void:
 
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	print(anim_name, " f; ", attacking)
+	#print(anim_name, " f; ", attacking)
 	
 	if anim_name == "dodge":
 		dodging = false
@@ -327,18 +322,25 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 		attacking = false
 		attack_advance = false
 		combo_count = 0
+	
+	if anim_name == "hit":
+		was_hit = false
+		$Hurtbox.can_signal_again = true
+		#$Hurtbox.set_collision_mask_value(5, true)
 
 func _on_dropthrough_cancel_timer_timeout() -> void:
 	falling_through = false
 
 
 func _on_animation_tree_animation_started(anim_name: StringName) -> void:
-	print(anim_name, " s; ", attacking)
+	#print(anim_name, " s; ", attacking)
 	
 	if anim_name == "attack_1":
 		change_sprite_pos()
 		combo_count += 1
 		print("combo count: ", combo_count, " a")
+		print(hitbox_pos_x)
+		
 	elif anim_name == "attack_2":
 		attack_advance = false
 		change_sprite_pos()
@@ -360,3 +362,19 @@ func reset_sprite_pos():
 
 func reset_attack_var():
 	if attack_advance: attack_advance = false
+
+
+func _on_hurtbox_player_was_hit() -> void:
+	if !dodging:
+		health -= 1
+		was_hit = true
+		$Camera2D.apply_shake()
+		#$Hurtbox.set_collision_mask_value(5, false)
+		
+	
+	if health <= 0:
+		die()
+
+
+func _on_hitbox_player_hit_boss() -> void:
+	$Camera2D.apply_shake()

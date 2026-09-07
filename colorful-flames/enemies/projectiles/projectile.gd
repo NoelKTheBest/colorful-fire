@@ -2,11 +2,11 @@ extends Area2D
 
 @export var a = 0
 @export var vector: Vector2
-@export var x_multiplier = 25
-@export var y_multiplier = 1
-@export var m: float = 1
 @export var r: float = 5
 @export var circle_center: Vector2
+var x_multiplier
+var y_multiplier
+var m: float = 1
 var time = 0.0
 var x_offset
 var y_offset
@@ -18,6 +18,11 @@ var set_wave
 ## for use with wave and linear functions only
 var set_horizontal_speed
 var set_flames
+var go_left := false
+var flip_mult = 1
+var move_to_pos : Vector2
+
+var linear_speed = 100
 
 
 # Called when the node enters the scene tree for the first time.
@@ -28,21 +33,26 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#position.y = tan(vector.x) * multiplier
+	#position.y = tan(vector.x) * multiplier+
 	#position.y = sin(vector.x) * multiplier
 	#position = circle(r) - not working
 	#position.y = log(vector.x) / log(10)
 	
+	flip_mult = -1 if go_left else 1
+	
 	if set_flames: $BlueFlames.visible = true
 	
 	if set_wave:
-		position.x = vector.y * x_multiplier + x_offset
+		position.x = vector.y * x_multiplier + x_offset * flip_mult
 		position.y = cos(vector.x) * y_multiplier + y_offset
 		$Wave.visible = true
 	
 	if set_linear:
+		#position.x = move_toward(position.x, move_to_pos.x, delta * linear_speed)
+		#position.y = move_toward(position.y, move_to_pos.y, delta * linear_speed)
 		position.x = vector.y * x_multiplier + x_offset
-		position.y = slope(m, vector.x, y_offset) * y_multiplier
+		print(slope(m * -1, vector.x, y_offset))
+		position.y = slope(m * -1, vector.x, y_offset) * y_multiplier
 		$Linear.visible = true
 	
 	if set_quadratic:
@@ -55,14 +65,14 @@ func _process(delta: float) -> void:
 	
 	if set_wave or set_linear:
 		vector.x += 0.1
-		vector.y += 0.1
+		vector.y -= 0.1
 	
 	if set_quadratic or set_cubic:
 		time += 0.01
 		time = clamp(time, 0.0, 1.0)
 	
-	print("POSITION: ", position)
-	print("y? ", y_offset)
+	#print("POSITION: ", position)
+	#print("y? ", y_offset)
 
 
 func set_offset():
@@ -103,8 +113,14 @@ func _cubic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: float)
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
-	print("I'm on screen :>  - ", vector, get_parent())
+	#print("I'm on screen :>  - ", vector, get_parent())
+	pass
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	print("Goodbye :wave: :D  - ", vector)
+	#queue_free()
+	pass
+
+
+func _on_timer_timeout() -> void:
+	queue_free()

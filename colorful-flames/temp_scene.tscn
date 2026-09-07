@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://yjp7qv166kau"]
 
-[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="1_bmn5f"]
+[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://nina/player.tscn" id="1_bmn5f"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e2o6t"]
 

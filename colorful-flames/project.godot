@@ -34,7 +34,8 @@ folder_colors={
 "res://enemies/": "yellow",
 "res://enemies/projectiles/": "teal",
 "res://fire_fx_v1.0/": "orange",
-"res://music and sound/": "purple"
+"res://music and sound/": "purple",
+"res://nina/": "pink"
 }
 
 [global_group]

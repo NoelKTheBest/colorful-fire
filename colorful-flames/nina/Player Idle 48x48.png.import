@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dccd3hotk42mk"
-path="res://.godot/imported/Nina-Movement.png-363b66102ee0ebc3a8c38dce190fa0c5.ctex"
+uid="uid://cvhybo2e2da23"
+path="res://.godot/imported/Player Idle 48x48.png-ba55a62205f7b040b10ecfae104e2da2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Nina-Movement.png"
-dest_files=["res://.godot/imported/Nina-Movement.png-363b66102ee0ebc3a8c38dce190fa0c5.ctex"]
+source_file="res://nina/Player Idle 48x48.png"
+dest_files=["res://.godot/imported/Player Idle 48x48.png-ba55a62205f7b040b10ecfae104e2da2.ctex"]
 
 [params]
 

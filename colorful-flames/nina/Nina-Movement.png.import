@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddeprv56upq8p"
-path="res://.godot/imported/Nina-Jump.png-62b20e106fc203fe26efc9a62d664890.ctex"
+uid="uid://dccd3hotk42mk"
+path="res://.godot/imported/Nina-Movement.png-af3c0e96cd635b9f0b3d7719527e26be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Nina-Jump.png"
-dest_files=["res://.godot/imported/Nina-Jump.png-62b20e106fc203fe26efc9a62d664890.ctex"]
+source_file="res://nina/Nina-Movement.png"
+dest_files=["res://.godot/imported/Nina-Movement.png-af3c0e96cd635b9f0b3d7719527e26be.ctex"]
 
 [params]
 
