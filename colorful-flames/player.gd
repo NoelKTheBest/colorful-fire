@@ -50,9 +50,9 @@ var sprite_init_position
 func _ready() -> void:
 	fire_spawn_init_position = $FireSpawnPosition.position
 	fire_spawn_origin = to_global($FireSpawnPosition.position)
-	print($FireSpawnPosition.position)
-	print(to_global($FireSpawnPosition.position))
-	print(fire_spawn_origin)
+	#print($FireSpawnPosition.position)
+	#print(to_global($FireSpawnPosition.position))
+	#print(fire_spawn_origin)
 	$AnimationTree.active = true
 	hitbox_init_position = $Hitbox.position
 	sprite_init_position = sprite_2d.position
@@ -197,7 +197,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			current_main_color = "black"
 			$Polygon2D.color = Color.BLACK
 		var key_name = OS.get_keycode_string(event.key_label)
-		print(key_name, "; pressed?: ", event.pressed)
+		#print(key_name, "; pressed?: ", event.pressed)
 		
 		#match key_name: 
 			#"Kp 5":
@@ -240,7 +240,7 @@ func spawn_flames():
 	if set_destroy: flames.can_destroy = true
 	flames.position.x = fire_spawn_origin.x + (fsi * fire_spread_amount * fire_spread_direction)
 	flames.position.y = fire_spawn_origin.y
-	print(fire_spawn_origin)
+	#print(fire_spawn_origin)
 	add_child(flames)
 	var mother = get_parent()
 	# Defer call since new nodes cannot get added to parent until all child nodes have been accounted for
@@ -297,7 +297,9 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "dodge":
 		dodging = false
 		init_dodge_direction = 0
-		$AnimationPlayer.speed_scale = 1.0 
+		$AnimationPlayer.speed_scale = 1.0
+	elif anim_name == "attack_1":
+		attacking = false
 
 
 func _on_dropthrough_cancel_timer_timeout() -> void:

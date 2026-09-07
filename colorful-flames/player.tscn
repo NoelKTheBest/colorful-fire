@@ -750,7 +750,23 @@ size = Vector2(10.36, 16.63)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxwtl"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7ghd"]
+bg_color = Color(0.20730008, 0.13800001, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvl01"]
+bg_color = Color(0.1847311, 0.64192635, 0.8890664, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 2
+corner_detail = 13
+
+[sub_resource type="Theme" id="Theme_b26j0"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_n7ghd")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_nvl01")
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=2000016662 groups=["Player"]]
+visibility_layer = 3
 z_index = 2
 collision_mask = 1796
 script = ExtResource("1_4flbx")
@@ -815,7 +831,7 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_u4nj2")
 debug_color = Color(0.18990615, 0.64234066, 0, 0.41960785)
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=2060197567]
+[node name="Hitbox" type="Area2D" parent="." unique_id=2060197567 groups=["Player Attack"]]
 position = Vector2(32, 0)
 collision_layer = 8
 collision_mask = 32
@@ -831,6 +847,32 @@ polygon = PackedVector2Array(-16, -24, -16, -24, -16, -16, -8, -16, -8, -24)
 [node name="DropthroughCancelTimer" type="Timer" parent="." unique_id=796188734]
 wait_time = 0.25
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=373276601]
+layer = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" unique_id=934736561]
+offset_left = 8.0
+offset_top = 584.0
+offset_right = 112.0
+offset_bottom = 611.0
+scale = Vector2(2, 2)
+theme = SubResource("Theme_b26j0")
+value = 100.0
+show_percentage = false
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1243474973]
+offset = Vector2(0, -27.66)
+zoom = Vector2(2.52, 2.52)
+limit_left = -512
+limit_right = 576
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="Icon" type="Sprite2D" parent="Camera2D" unique_id=924588381]
+position = Vector2(204, 52)
+scale = Vector2(0.1875, 0.4375)
+texture = ExtResource("2_onrkg")
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="area_entered" from="FireInteractArea" to="." method="_on_fire_interact_area_area_entered"]

@@ -4614,21 +4614,6 @@ physics_layer_0/collision_layer = 256
 physics_layer_0/collision_mask = 35
 sources/2 = SubResource("TileSetAtlasSource_l5ukw")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7ghd"]
-bg_color = Color(0.20730008, 0.13800001, 0.6, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvl01"]
-bg_color = Color(0.1847311, 0.64192635, 0.8890664, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 2
-corner_detail = 13
-
-[sub_resource type="Theme" id="Theme_b26j0"]
-ProgressBar/styles/background = SubResource("StyleBoxFlat_n7ghd")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_nvl01")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4nj2"]
 size = Vector2(20, 504)
 
@@ -4711,27 +4696,9 @@ tile_map_data = PackedByteArray("AAAAAP//AgABAAcAAAD/////AgAAAAcAAAABAP//AgACAAc
 tile_set = SubResource("TileSet_u4nj2")
 
 [node name="CharacterBody2D" parent="." unique_id=2000016662 instance=ExtResource("9_jgkyn")]
-position = Vector2(-144, -48)
+position = Vector2(128, -120)
 fall_velocity_factor = 2.03
-
-[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D" unique_id=1918431065]
-
-[node name="ProgressBar" type="ProgressBar" parent="CharacterBody2D/CanvasLayer" unique_id=622747005]
-offset_left = -368.0
-offset_top = 24.0
-offset_right = -264.0
-offset_bottom = 51.0
-theme = SubResource("Theme_b26j0")
-value = 100.0
-show_percentage = false
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1210073305]
-offset = Vector2(0, -27.66)
-zoom = Vector2(2.52, 2.52)
-limit_left = -512
-limit_right = 576
-limit_smoothed = true
-position_smoothing_enabled = true
+metadata/_edit_group_ = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D" unique_id=1943286930]
 stream = ExtResource("11_jgkyn")
@@ -4739,6 +4706,7 @@ volume_db = -13.922
 autoplay = true
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=680884208]
+visible = false
 position = Vector2(-95.99999, 71.99999)
 scale = Vector2(0.415, 0.415)
 texture = ExtResource("11_aomqu")
@@ -4746,6 +4714,7 @@ script = ExtResource("12_krmtw")
 a = 70
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=209939500]
+position = Vector2(8, -8)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1030532958]
 position = Vector2(160, -136)

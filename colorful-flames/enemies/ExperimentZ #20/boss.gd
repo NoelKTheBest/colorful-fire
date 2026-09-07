@@ -1,7 +1,7 @@
 extends AnimatedSprite2D
 
 var attacking = false
-var projectile = preload('res://projectile.gd')
+var projectile = preload('res://enemies/projectiles/projectile.tscn')
 var positions = []
 
 
@@ -29,15 +29,17 @@ func _on_attack_timer_timeout() -> void:
 
 
 func _on_projectile_wait_timeout() -> void:
-	var new_orb = projectile.new()
+	var new_orb = projectile.instantiate()
 	new_orb.position = positions[0].position
+	add_child(new_orb)
 	new_orb.set_linear = true
 	new_orb.m = 4
 	new_orb.reparent(get_parent())
+	new_orb.set_offset()
 
 
 func _on_shield_area_entered(area: Area2D) -> void:
-	area.queue_free()
+	if !area.is_in_group("Player Attack"): area.queue_free()
 
 
 func _on_shield_body_entered(body: Node2D) -> void:

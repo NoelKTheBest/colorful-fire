@@ -2,7 +2,8 @@ extends Area2D
 
 @export var a = 0
 @export var vector: Vector2
-@export var multiplier = 25
+@export var x_multiplier = 25
+@export var y_multiplier = 1
 @export var m: float = 1
 @export var r: float = 5
 @export var circle_center: Vector2
@@ -35,18 +36,22 @@ func _process(delta: float) -> void:
 	if set_flames: $BlueFlames.visible = true
 	
 	if set_wave:
-		position.x = vector.y * multiplier + x_offset
-		position.y = cos(vector.x) * multiplier + y_offset
+		position.x = vector.y * x_multiplier + x_offset
+		position.y = cos(vector.x) * y_multiplier + y_offset
+		$Wave.visible = true
 	
 	if set_linear:
-		position.x = vector.y * multiplier + x_offset
-		position.y = slope(m, vector.x, 0) * multiplier
+		position.x = vector.y * x_multiplier + x_offset
+		position.y = slope(m, vector.x, y_offset) * y_multiplier
+		$Linear.visible = true
 	
 	if set_quadratic:
 		position = _quadratic_bezier($'../Node2D'.position, $'../Node2D2'.position, $'../Node2D3'.position, time)
+		$Quadratic_Cubic.visible = true
 	
 	if set_cubic:
 		position = _cubic_bezier($'../Node2D'.position, $'../Node2D2'.position, $'../Node2D3'.position, $'../Node2D4'.position, time)
+		$Quadratic_Cubic.visible = true
 	
 	if set_wave or set_linear:
 		vector.x += 0.1
@@ -55,6 +60,15 @@ func _process(delta: float) -> void:
 	if set_quadratic or set_cubic:
 		time += 0.01
 		time = clamp(time, 0.0, 1.0)
+	
+	print("POSITION: ", position)
+	print("y? ", y_offset)
+
+
+func set_offset():
+	x_offset = position.x
+	y_offset = position.y
+	print()
 
 
 func slope(mm: float, ttime: float, b: float):
@@ -86,3 +100,11 @@ func _cubic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: float)
 	
 	var s = r0.lerp(r1, t)
 	return s
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	print("I'm on screen :>  - ", vector, get_parent())
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	print("Goodbye :wave: :D  - ", vector)

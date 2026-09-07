@@ -43,6 +43,7 @@ Player=""
 Flames=""
 Enemy=""
 Ground=""
+"Player Attack"=""
 
 [input]
 
