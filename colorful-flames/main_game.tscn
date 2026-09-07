@@ -4703,7 +4703,6 @@ metadata/_edit_group_ = true
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D" unique_id=1943286930]
 stream = ExtResource("11_jgkyn")
 volume_db = -13.922
-autoplay = true
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=680884208]
 visible = false
@@ -4729,6 +4728,7 @@ position = Vector2(712, 488)
 position = Vector2(-176, 96)
 
 [node name="Boss" parent="." unique_id=1277332470 instance=ExtResource("13_krmtw")]
+process_mode = 4
 position = Vector2(288, -88)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=272266653]

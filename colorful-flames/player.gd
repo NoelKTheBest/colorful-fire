@@ -13,6 +13,7 @@ const DODGE_VELOCITY = 350
 @export var dodge_speed_boost_init_value = 1.5
 @export var can_advance = false
 @export var pivot_inc: float
+@export var window_open := false
 
 var flames_spreading: bool = false
 var coroutine_finished: bool = false
@@ -40,6 +41,7 @@ var set_destroy:= false
 var falling_through = false
 var was_hit:= false
 var sprite_init_position
+var combo_count := 0
 
 
 @onready var fire_scene = preload("res://flames.tscn")
@@ -56,6 +58,7 @@ func _ready() -> void:
 	$AnimationTree.active = true
 	hitbox_init_position = $Hitbox.position
 	sprite_init_position = sprite_2d.position
+	get_tree().process_frame.connect(reset_sprite_pos)
 
 
 func _process(_delta: float) -> void:
@@ -66,6 +69,15 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed(&'attack'):
 		attacking = true
+		#var state_machine = $AnimationTree.get("parameters/playback")
+		#state_machine.travel("attack_1")
+		
+	
+	if Input.is_action_just_pressed(&'attack') and window_open:
+		attack_advance = true
+		#var state_machine = $AnimationTree.get("parameters/playback")
+		#if combo_count == 1: state_machine.travel("attack_2")
+		#if combo_count == 2: state_machine.travel("attack_3")
 	
 	if flames_spreading and coroutine_finished:
 		match current_main_color:
@@ -88,8 +100,9 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(&'activate_secondary_ability'):
 		ability_activated = true
 	
-	sprite_2d.position.x = sprite_init_position.x - pivot_inc if sprite_2d.flip_h else sprite_init_position.x + pivot_inc
-	sprite_2d.position.y = -8.0 if attacking else 0.0
+	$Icon.visible = true if window_open else false
+	
+	#if !attacking and combo_count == 0: sprite_2d.position.y = -8.0
 
 
 func _physics_process(delta: float) -> void:
@@ -137,7 +150,7 @@ func _physics_process(delta: float) -> void:
 			init_dodge_direction = direction
 		
 		velocity.x = move_toward(velocity.x, direction * SPEED, accel)
-		sprite_2d.flip_h = true if direction < 0 else false
+		if !attacking: sprite_2d.flip_h = true if direction < 0 else false
 		$'Sprite2D/Secondary Sprite'.flip_h = true if direction < 0 else false
 	else:
 		if dodging and init_dodge_direction == 0:
@@ -294,13 +307,56 @@ func _on_fire_interact_area_area_exited(area: Area2D) -> void:
 
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	print(anim_name, " f; ", attacking)
+	
 	if anim_name == "dodge":
 		dodging = false
 		init_dodge_direction = 0
 		$AnimationPlayer.speed_scale = 1.0
 	elif anim_name == "attack_1":
 		attacking = false
-
+		attack_advance = false
+		combo_count = 0
+		#pivot_inc = 0.0
+		#call_deferred(&'reset_sprite_pos')
+	elif anim_name == "attack_2":
+		attacking = false
+		attack_advance = false
+		combo_count = 0
+	elif anim_name == "attack_3":
+		attacking = false
+		attack_advance = false
+		combo_count = 0
 
 func _on_dropthrough_cancel_timer_timeout() -> void:
 	falling_through = false
+
+
+func _on_animation_tree_animation_started(anim_name: StringName) -> void:
+	print(anim_name, " s; ", attacking)
+	
+	if anim_name == "attack_1":
+		change_sprite_pos()
+		combo_count += 1
+		print("combo count: ", combo_count, " a")
+	elif anim_name == "attack_2":
+		attack_advance = false
+		change_sprite_pos()
+		combo_count += 1
+		print("combo count: ", combo_count, " b")
+
+
+func change_sprite_pos():
+	sprite_2d.position.x = sprite_init_position.x - pivot_inc if sprite_2d.flip_h else sprite_init_position.x + pivot_inc
+	sprite_2d.position.y = -8.0
+
+
+func reset_sprite_pos():
+	if !attacking and combo_count == 0:
+		pivot_inc = 0.0
+		sprite_2d.position.x = sprite_init_position.x - pivot_inc if sprite_2d.flip_h else sprite_init_position.x + pivot_inc
+		sprite_2d.position.y = 0.0
+
+
+func reset_attack_var():
+	if attack_advance: attack_advance = false
