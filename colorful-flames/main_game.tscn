@@ -4870,6 +4870,7 @@ one_shot = true
 autostart = true
 
 [node name="Controls" type="Label" parent="Tutorial" unique_id=569307517]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 27
@@ -4884,5 +4885,6 @@ U - Dodge
 [connection signal="boss_attacking" from="Boss" to="." method="_on_boss_boss_attacking"]
 [connection signal="boss_was_hit" from="Boss" to="CharacterBody2D" method="_on_boss_boss_was_hit"]
 [connection signal="ult_notify" from="Boss" to="." method="_on_boss_ult_notify"]
+[connection signal="tutorial_finished" from="Tutorial" to="." method="_on_tutorial_tutorial_finished"]
 [connection signal="timeout" from="Tutorial/TutoTimer" to="." method="_on_tuto_timer_timeout"]
 [connection signal="timeout" from="Tutorial/TutoTimer" to="Tutorial" method="_on_tuto_timer_timeout"]

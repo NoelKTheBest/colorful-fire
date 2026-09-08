@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+signal tutorial_finished
 var tuto_step = 1
 
 var tuto_text = [
@@ -17,6 +18,9 @@ func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_UNPAUSED:
 			if tuto_step == 1: $AnimationPlayer.play(&'text_scroll')
+			
+			#if tuto_step == 7:
+				#$Controls.visible = 
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -60,6 +64,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			7:
 				if event.keycode == Key.KEY_ENTER:
 					get_tree().paused = false
+					tutorial_finished.emit()
 
 
 func _on_tuto_timer_timeout() -> void:
