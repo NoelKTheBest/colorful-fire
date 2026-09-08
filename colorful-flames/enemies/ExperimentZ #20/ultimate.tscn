@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://c1klgimmiy2v"]
+
+[ext_resource type="Script" uid="uid://30sp5hptabur" path="res://ultimate_1.gd" id="1_0o8jv"]
+[ext_resource type="PackedScene" uid="uid://csyan4fcgpgse" path="res://enemies/projectiles/projectile.tscn" id="2_1je8i"]
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="3_4rc3b"]
+
+[node name="Ultimate" type="Node" unique_id=891170302]
+script = ExtResource("1_0o8jv")
+
+[node name="Projectile" parent="." unique_id=149530684 instance=ExtResource("2_1je8i")]
+position = Vector2(464, -560)
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Projectile" unique_id=1039105849 groups=["Position Marker"]]
+self_modulate = Color(1, 0, 0, 1)
+z_index = 4
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("3_4rc3b")
+
+[node name="Projectile2" parent="." unique_id=97707647 instance=ExtResource("2_1je8i")]
+position = Vector2(776, -504)
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Projectile2" unique_id=1054471435 groups=["Position Marker"]]
+self_modulate = Color(1, 0, 0, 1)
+z_index = 4
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("3_4rc3b")
+
+[node name="Projectile3" parent="." unique_id=2132843220 instance=ExtResource("2_1je8i")]
+position = Vector2(1048, -352)
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Projectile3" unique_id=891884361 groups=["Position Marker"]]
+self_modulate = Color(1, 0, 0, 1)
+z_index = 4
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("3_4rc3b")
+
+[node name="Projectile4" parent="." unique_id=2062442527 instance=ExtResource("2_1je8i")]
+position = Vector2(992, -24)
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Projectile4" unique_id=1314127798 groups=["Position Marker"]]
+self_modulate = Color(1, 0, 0, 1)
+z_index = 4
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("3_4rc3b")
+
+[node name="Marker" type="Node2D" parent="." unique_id=760293570 groups=["Linear Points"]]
+position = Vector2(96, 520)
+
+[node name="Icon" type="Sprite2D" parent="Marker" unique_id=783723891]
+visible = false
+scale = Vector2(0.76, 0.76)
+texture = ExtResource("3_4rc3b")
+
+[node name="Timer" type="Timer" parent="." unique_id=1457485650]
+wait_time = 3.49
+one_shot = true
+autostart = true

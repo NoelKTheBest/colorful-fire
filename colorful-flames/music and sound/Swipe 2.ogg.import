@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bgl454i3w6rj"
+path="res://.godot/imported/Swipe 2.ogg-81a15cc4b4b4c89faf4948af5ad906f3.oggvorbisstr"
+
+[deps]
+
+source_file="res://music and sound/Swipe 2.ogg"
+dest_files=["res://.godot/imported/Swipe 2.ogg-81a15cc4b4b4c89faf4948af5ad906f3.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

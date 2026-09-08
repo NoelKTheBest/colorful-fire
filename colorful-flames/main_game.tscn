@@ -14,6 +14,8 @@
 [ext_resource type="AudioStream" uid="uid://b7eyg84hhrppr" path="res://music and sound/OC Main Theme.ogg" id="11_jgkyn"]
 [ext_resource type="Script" uid="uid://da5j65vi7l1c2" path="res://math.gd" id="12_krmtw"]
 [ext_resource type="PackedScene" uid="uid://dd5li6uxquwjg" path="res://enemies/ExperimentZ #20/boss.tscn" id="13_krmtw"]
+[ext_resource type="PackedScene" uid="uid://c1klgimmiy2v" path="res://enemies/ExperimentZ #20/ultimate.tscn" id="15_qpaub"]
+[ext_resource type="Script" uid="uid://ds28inmpv6nab" path="res://tutorial.gd" id="16_an1vu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2pltu"]
 texture = ExtResource("1_ykeeq")
@@ -4617,6 +4619,42 @@ sources/2 = SubResource("TileSetAtlasSource_l5ukw")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4nj2"]
 size = Vector2(20, 504)
 
+[sub_resource type="Animation" id="Animation_an1vu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_borgi"]
+resource_name = "text_scroll"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ih6an"]
+_data = {
+&"RESET": SubResource("Animation_an1vu"),
+&"text_scroll": SubResource("Animation_borgi")
+}
+
 [node name="Node" type="Node" unique_id=1338135851]
 script = ExtResource("1_krmtw")
 
@@ -4704,8 +4742,9 @@ fall_velocity_factor = 2.03
 metadata/_edit_group_ = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D" unique_id=1943286930]
+process_mode = 3
 stream = ExtResource("11_jgkyn")
-volume_db = -13.922
+autoplay = true
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=680884208]
 visible = false
@@ -4716,22 +4755,78 @@ script = ExtResource("12_krmtw")
 a = 70
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=209939500]
-position = Vector2(8, -8)
+position = Vector2(9, -8)
 
-[node name="Node2D" type="Node2D" parent="." unique_id=1030532958]
+[node name="CubicPoints" type="Node" parent="." unique_id=2103889090]
+
+[node name="Node2D" type="Node2D" parent="CubicPoints" unique_id=1030532958 groups=["Cubic Points"]]
 position = Vector2(160, -136)
 
-[node name="Node2D2" type="Node2D" parent="." unique_id=540046704]
+[node name="Sprite2D" type="Sprite2D" parent="CubicPoints/Node2D" unique_id=973343354]
+self_modulate = Color(0, 1, 0.033422947, 1)
+position = Vector2(192, 48)
+scale = Vector2(0.23, 0.23)
+texture = ExtResource("11_aomqu")
+
+[node name="Node2D2" type="Node2D" parent="CubicPoints" unique_id=540046704 groups=["Cubic Points"]]
 position = Vector2(-440, -616)
 
-[node name="Node2D3" type="Node2D" parent="." unique_id=1732014065]
+[node name="Sprite2D" type="Sprite2D" parent="CubicPoints/Node2D2" unique_id=296130798]
+self_modulate = Color(0, 1, 0.033422947, 1)
+scale = Vector2(0.23, 0.23)
+texture = ExtResource("11_aomqu")
+
+[node name="Node2D3" type="Node2D" parent="CubicPoints" unique_id=1732014065 groups=["Cubic Points"]]
 position = Vector2(712, 488)
 
-[node name="Node2D4" type="Node2D" parent="." unique_id=592565207]
+[node name="Sprite2D" type="Sprite2D" parent="CubicPoints/Node2D3" unique_id=1286761262]
+self_modulate = Color(0, 1, 0.033422947, 1)
+scale = Vector2(0.23, 0.23)
+texture = ExtResource("11_aomqu")
+
+[node name="Node2D4" type="Node2D" parent="CubicPoints" unique_id=592565207 groups=["Cubic Points"]]
 position = Vector2(-176, 96)
 
-[node name="Boss" parent="." unique_id=1277332470 instance=ExtResource("13_krmtw")]
+[node name="Sprite2D" type="Sprite2D" parent="CubicPoints/Node2D4" unique_id=1932558077]
+self_modulate = Color(0, 1, 0.033422947, 1)
+position = Vector2(-32, 32)
+scale = Vector2(0.23, 0.23)
+texture = ExtResource("11_aomqu")
+
+[node name="QuadraticPoints" type="Node" parent="." unique_id=883061873]
+
+[node name="Node2D" type="Node2D" parent="QuadraticPoints" unique_id=2051357706 groups=["Quadratic Points"]]
+position = Vector2(288, -128)
+
+[node name="Sprite2D" type="Sprite2D" parent="QuadraticPoints/Node2D" unique_id=868394218]
+self_modulate = Color(0, 0.23333359, 1, 1)
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("11_aomqu")
+
+[node name="Node2D2" type="Node2D" parent="QuadraticPoints" unique_id=440114707 groups=["Quadratic Points"]]
+position = Vector2(-400, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="QuadraticPoints/Node2D2" unique_id=739290031]
+self_modulate = Color(0, 0.23333359, 1, 1)
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("11_aomqu")
+
+[node name="Node2D3" type="Node2D" parent="QuadraticPoints" unique_id=196261789 groups=["Quadratic Points"]]
+position = Vector2(448, 232)
+
+[node name="Sprite2D" type="Sprite2D" parent="QuadraticPoints/Node2D3" unique_id=2108227758]
+self_modulate = Color(0, 0.23333359, 1, 1)
+position = Vector2(-160.00002, -144.00002)
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("11_aomqu")
+
+[node name="Boss" parent="." unique_id=1277332470 node_paths=PackedStringArray("ultimate") instance=ExtResource("13_krmtw")]
 position = Vector2(288, -88)
+animation = &"die"
+frame = 6
+frame_progress = 1.0
+ultimate = NodePath("../Ultimate")
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=272266653]
 position = Vector2(-520, -48)
@@ -4750,3 +4845,44 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=494488624]
 shape = SubResource("RectangleShape2D_u4nj2")
 debug_color = Color(0.78164697, 0.1249514, 1, 0.41960785)
+
+[node name="Ultimate" parent="." unique_id=891170302 instance=ExtResource("15_qpaub")]
+
+[node name="Tutorial" type="CanvasLayer" parent="." unique_id=1939784241]
+process_mode = 2
+script = ExtResource("16_an1vu")
+
+[node name="Label" type="Label" parent="Tutorial" unique_id=1700209903]
+offset_left = 256.0
+offset_top = 600.0
+offset_right = 1003.0
+offset_bottom = 623.0
+text = "Hello, and welcome to my game! My name is Nina and I need your help to defeat this evil demon."
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial" unique_id=938761275]
+libraries/ = SubResource("AnimationLibrary_ih6an")
+
+[node name="TutoTimer" type="Timer" parent="Tutorial" unique_id=245738572]
+process_mode = 3
+one_shot = true
+autostart = true
+
+[node name="Controls" type="Label" parent="Tutorial" unique_id=569307517]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 27
+text = "Space - jump
+WASD - move
+Space + ↓ - Drop through platform
+J - Attack
+F - Flame Ability
+U - Dodge
+[Esc] - continue"
+
+[connection signal="boss_attacking" from="Boss" to="." method="_on_boss_boss_attacking"]
+[connection signal="boss_was_hit" from="Boss" to="CharacterBody2D" method="_on_boss_boss_was_hit"]
+[connection signal="ult_notify" from="Boss" to="." method="_on_boss_ult_notify"]
+[connection signal="timeout" from="Tutorial/TutoTimer" to="." method="_on_tuto_timer_timeout"]
+[connection signal="timeout" from="Tutorial/TutoTimer" to="Tutorial" method="_on_tuto_timer_timeout"]

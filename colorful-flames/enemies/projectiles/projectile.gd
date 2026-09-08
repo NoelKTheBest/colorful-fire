@@ -4,6 +4,11 @@ extends Area2D
 @export var vector: Vector2
 @export var r: float = 5
 @export var circle_center: Vector2
+@export_subgroup("Linear Controls")
+@export var linear_speed = 5.0
+@export_range(-1.5, 1.5) var linear_range = 0.0
+@export var color = Color.ORANGE_RED
+
 var x_multiplier
 var y_multiplier
 var m: float = 1
@@ -22,13 +27,18 @@ var go_left := false
 var flip_mult = 1
 var move_to_pos : Vector2
 
-var linear_speed = 100
+var cubic_p = []
+var quad_p = []
+var lin_p = []
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	x_offset = position.x
 	y_offset = position.y
+	cubic_p = get_tree().get_nodes_in_group("Cubic Points")
+	quad_p = get_tree().get_nodes_in_group("Quadratic Points")
+	lin_p = get_tree().get_nodes_in_group("Linear Points")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,19 +58,18 @@ func _process(delta: float) -> void:
 		$Wave.visible = true
 	
 	if set_linear:
-		#position.x = move_toward(position.x, move_to_pos.x, delta * linear_speed)
-		#position.y = move_toward(position.y, move_to_pos.y, delta * linear_speed)
-		position.x = vector.y * x_multiplier + x_offset
-		print(slope(m * -1, vector.x, y_offset))
-		position.y = slope(m * -1, vector.x, y_offset) * y_multiplier
-		$Linear.visible = true
+		var destination = (lin_p[0].position - position)
+		var within_range_x = destination.x > -1.5 and destination.x < 1.5
+		var within_range_y = destination.y > -1.5 and destination.y < 1.5
+		if !within_range_x and !within_range_y:
+			position += destination.normalized() * linear_speed
 	
 	if set_quadratic:
-		position = _quadratic_bezier($'../Node2D'.position, $'../Node2D2'.position, $'../Node2D3'.position, time)
+		position = _quadratic_bezier(quad_p[0].position, quad_p[1].position, quad_p[2].position, time)
 		$Quadratic_Cubic.visible = true
 	
 	if set_cubic:
-		position = _cubic_bezier($'../Node2D'.position, $'../Node2D2'.position, $'../Node2D3'.position, $'../Node2D4'.position, time)
+		position = _cubic_bezier(cubic_p[0].position, cubic_p[1].position, cubic_p[2].position, cubic_p[3].position, time)
 		$Quadratic_Cubic.visible = true
 	
 	if set_wave or set_linear:
@@ -70,9 +79,6 @@ func _process(delta: float) -> void:
 	if set_quadratic or set_cubic:
 		time += 0.01
 		time = clamp(time, 0.0, 1.0)
-	
-	#print("POSITION: ", position)
-	#print("y? ", y_offset)
 
 
 func set_offset():
@@ -123,4 +129,5 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 func _on_timer_timeout() -> void:
-	queue_free()
+	#queue_free()
+	pass

@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://ipand45liak1" path="res://camera_2d.gd" id="12_ivps1"]
 [ext_resource type="Script" uid="uid://cmsw0fry0mtvj" path="res://nina/hurtbox.gd" id="12_urp6f"]
 [ext_resource type="Script" uid="uid://cf6kel2opn6qg" path="res://nina/hitbox.gd" id="13_bwjto"]
+[ext_resource type="AudioStream" uid="uid://dhdp31aef4jmx" path="res://music and sound/Fire 4.ogg" id="15_e5qk6"]
+[ext_resource type="AudioStream" uid="uid://c37vwfjx3cqlb" path="res://music and sound/Cancel 3.ogg" id="16_kiuy6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u4nj2"]
 
@@ -1227,6 +1229,14 @@ limit_smoothed = true
 position_smoothing_enabled = true
 script = ExtResource("12_ivps1")
 random_strength = 3.68
+
+[node name="SwordSFX" type="AudioStreamPlayer2D" parent="." unique_id=109543666]
+
+[node name="FireSFX" type="AudioStreamPlayer2D" parent="." unique_id=2055180053]
+stream = ExtResource("15_e5qk6")
+
+[node name="Land" type="AudioStreamPlayer2D" parent="." unique_id=714895520]
+stream = ExtResource("16_kiuy6")
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="animation_started" from="AnimationTree" to="." method="_on_animation_tree_animation_started"]

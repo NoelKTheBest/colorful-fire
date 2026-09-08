@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://bqeoiq20yscbo" path="res://enemies/ExperimentZ #20/boss.gd" id="4_t6wuw"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="5_vtqod"]
 [ext_resource type="Script" uid="uid://q7aptg4s817o" path="res://enemies/ExperimentZ #20/player_barrier.gd" id="6_csgn7"]
+[ext_resource type="Texture2D" uid="uid://uhfqv1p73ym2" path="res://assets/ATTACK VFX PACK PREMIUM/VslashParried1.png" id="7_n0d1c"]
+[ext_resource type="Texture2D" uid="uid://dv23w0clki7sd" path="res://assets/ATTACK VFX PACK PREMIUM/Impactmedium3.png" id="8_8tl6n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n0d1c"]
 atlas = ExtResource("1_3g0bo")
@@ -311,7 +313,74 @@ ProgressBar/styles/fill = SubResource("StyleBoxFlat_vosfo")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxwtl"]
 size = Vector2(42.5, 61.5)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_b82sl"]
+atlas = ExtResource("7_n0d1c")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjjqe"]
+atlas = ExtResource("7_n0d1c")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0lqx"]
+atlas = ExtResource("7_n0d1c")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofei6"]
+atlas = ExtResource("7_n0d1c")
+region = Rect2(144, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfums"]
+atlas = ExtResource("8_8tl6n")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yeksh"]
+atlas = ExtResource("8_8tl6n")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rm4m"]
+atlas = ExtResource("8_8tl6n")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4c6w"]
+atlas = ExtResource("8_8tl6n")
+region = Rect2(144, 0, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_csgn7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b82sl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjjqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0lqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofei6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfums")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yeksh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rm4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4c6w")
+}],
+"loop": 0,
+"name": &"impact",
+"speed": 10.0
+}]
 
 [node name="Boss" type="AnimatedSprite2D" unique_id=1277332470]
 self_modulate = Color(1.326, 0, 0.17, 1)
@@ -426,15 +495,23 @@ shape = SubResource("RectangleShape2D_yxwtl")
 debug_color = Color(0.70196074, 0, 0.11363844, 0.41960785)
 
 [node name="DamageFX" type="AnimatedSprite2D" parent="." unique_id=220712642]
+position = Vector2(-32, 24)
+scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("SpriteFrames_csgn7")
+animation = &"impact"
+flip_h = true
 
 [node name="DamageTimer" type="Timer" parent="." unique_id=1886147713]
 wait_time = 0.505
 one_shot = true
+
+[node name="DamageSFX" type="AudioStreamPlayer2D" parent="." unique_id=469766211]
+volume_db = 4.913
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
 [connection signal="frame_changed" from="." to="." method="_on_frame_changed"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ProjectileWait" to="." method="_on_projectile_wait_timeout"]
 [connection signal="body_entered" from="Shield" to="." method="_on_shield_body_entered"]
+[connection signal="animation_finished" from="DamageFX" to="." method="_on_damage_fx_animation_finished"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://lowtwoou1ou1"
+path="res://.godot/imported/Accept 4.ogg-2f57587d4c3f50edc1ee71008e312fe0.oggvorbisstr"
+
+[deps]
+
+source_file="res://music and sound/Accept 4.ogg"
+dest_files=["res://.godot/imported/Accept 4.ogg-2f57587d4c3f50edc1ee71008e312fe0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

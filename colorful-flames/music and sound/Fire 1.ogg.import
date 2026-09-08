@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dip6hotdl8cve"
+path="res://.godot/imported/Fire 1.ogg-fec2508b22e26fe0f2f41f37275f16ee.oggvorbisstr"
+
+[deps]
+
+source_file="res://music and sound/Fire 1.ogg"
+dest_files=["res://.godot/imported/Fire 1.ogg-fec2508b22e26fe0f2f41f37275f16ee.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

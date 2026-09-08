@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c37vwfjx3cqlb"
+path="res://.godot/imported/Cancel 3.ogg-701c258a1e803f7d283888f8637a8311.oggvorbisstr"
+
+[deps]
+
+source_file="res://music and sound/Cancel 3.ogg"
+dest_files=["res://.godot/imported/Cancel 3.ogg-701c258a1e803f7d283888f8637a8311.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

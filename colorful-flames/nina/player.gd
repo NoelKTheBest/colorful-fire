@@ -15,6 +15,7 @@ const DODGE_VELOCITY = 350
 @export var pivot_inc: float
 @export var window_open := false
 @export var hitbox_pos_x = 0.0
+var attack_move_scale = 1
 
 var flames_spreading: bool = false
 var coroutine_finished: bool = false
@@ -44,6 +45,12 @@ var was_hit:= false
 var sprite_init_position
 var combo_count := 0
 
+var sword1 = preload('res://music and sound/Swipe 1.ogg')
+var sword2 = preload('res://music and sound/Swipe 2.ogg')
+var sword3 = preload('res://music and sound/Swipe 3.ogg')
+var fire = preload('res://music and sound/Fire 4.ogg')
+
+var prev_y_velocity
 
 @onready var fire_scene = preload("res://flames.tscn")
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
@@ -63,10 +70,14 @@ func _ready() -> void:
 	$CanvasLayer/ProgressBar.max_value = health
 	$Hurtbox.can_signal_again = true
 	$Hitbox.can_signal_again = true
+	#print($'../QuadraticPoints/Node2D')
+	#print($QuadraticPoints/Node2D)
+	prev_y_velocity = velocity.y
 
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(&"set_fire"):
+		$FireSFX.play()
 		flames_spreading = true
 		coroutine_finished = true
 		$Timer.start()
@@ -156,8 +167,9 @@ func _physics_process(delta: float) -> void:
 		if dodging and init_dodge_direction == 0:
 			init_dodge_direction = direction
 		
-		velocity.x = move_toward(velocity.x, direction * SPEED, accel)
-		if !attacking: sprite_2d.flip_h = true if direction < 0 else false
+		attack_move_scale = 1 if !attacking and combo_count == 0 else 0.5
+		velocity.x = move_toward(velocity.x, direction * SPEED * attack_move_scale, accel)
+		if !attacking and combo_count == 0: sprite_2d.flip_h = true if direction < 0 else false
 		$'Sprite2D/Secondary Sprite'.flip_h = true if direction < 0 else false
 	else:
 		if dodging and init_dodge_direction == 0:
@@ -179,8 +191,12 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	SceneVariables.player_position = position
+	if velocity.y == 0 and prev_y_velocity > 0:
+		$Land.play()
 	
+	prev_y_velocity = velocity.y
+	
+	SceneVariables.player_position = position
 
 
 #func _unhandled_input(event: InputEvent) -> void:
@@ -336,16 +352,22 @@ func _on_animation_tree_animation_started(anim_name: StringName) -> void:
 	#print(anim_name, " s; ", attacking)
 	
 	if anim_name == "attack_1":
+		$SwordSFX.stream = sword1
+		$SwordSFX.play()
 		change_sprite_pos()
 		combo_count += 1
 		print("combo count: ", combo_count, " a")
 		print(hitbox_pos_x)
-		
 	elif anim_name == "attack_2":
+		$SwordSFX.stream = sword2
+		$SwordSFX.play()
 		attack_advance = false
 		change_sprite_pos()
 		combo_count += 1
 		print("combo count: ", combo_count, " b")
+	elif anim_name == "attack_3":
+		$SwordSFX.stream = sword3
+		$SwordSFX.play()
 
 
 func change_sprite_pos():
@@ -354,7 +376,7 @@ func change_sprite_pos():
 
 
 func reset_sprite_pos():
-	if !attacking and combo_count == 0:
+	if (!attacking and combo_count == 0) or was_hit:
 		pivot_inc = 0.0
 		sprite_2d.position.x = sprite_init_position.x - pivot_inc if sprite_2d.flip_h else sprite_init_position.x + pivot_inc
 		sprite_2d.position.y = 0.0
@@ -377,4 +399,8 @@ func _on_hurtbox_player_was_hit() -> void:
 
 
 func _on_hitbox_player_hit_boss() -> void:
+	$Camera2D.apply_shake()
+
+
+func _on_boss_boss_was_hit() -> void:
 	$Camera2D.apply_shake()
