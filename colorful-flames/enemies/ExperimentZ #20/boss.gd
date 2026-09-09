@@ -3,6 +3,8 @@ extends AnimatedSprite2D
 signal boss_attacking
 signal ult_notify
 signal boss_was_hit
+signal boss_died
+signal ult_activated
 
 @export var ultimate: Node
 
@@ -21,7 +23,7 @@ var pos_pattern = 0
 var proj_pattern = 0
 var ult_pattern = 1
 
-var unleash_ultimate_attack = false
+var unleash_ultimate_attack = true
 
 var impact = preload('res://music and sound/385966__minituffy__large-swede-stab-with-whoosh.wav')
 
@@ -51,8 +53,8 @@ func _process(delta: float) -> void:
 				if !areas[0].is_in_group("Player Attack"): 
 					if areas[0].is_in_group("Flames"):
 						health -= 0.1
-					else:
-						areas[0].queue_free()
+					#else:
+						#areas[0].queue_free()
 				else:
 					if !was_hit:
 						health -= 3
@@ -83,7 +85,9 @@ func _on_animation_finished() -> void:
 	if !dying: 
 		play(&'default')
 		current_frame = 0
-	elif dying: queue_free()
+	elif dying:
+		queue_free()
+		boss_died.emit()
 
 
 func _on_attack_timer_timeout() -> void:
@@ -103,6 +107,7 @@ func _on_projectile_wait_timeout() -> void:
 		ultimate.marker.position = pp
 		ultimate.activate_projectiles(ult_pattern)
 		unleash_ultimate_attack = false
+		ult_activated.emit()
 	else:
 		# if the pattern number is greater than it's initial starting value
 		if ult_pattern > 1: ultimate.reset_projectiles()
@@ -145,18 +150,19 @@ func toggle_hitbox():
 	$Area2D2.visible = false
 
 
-func _on_shield_area_entered(area: Area2D) -> void:
-	if area.visible:
-		if !area.is_in_group("Player Attack"): area.queue_free()
-		else:
-			if !was_hit:
-				health -= 3
-
-				was_hit = true
+#func _on_shield_area_entered(area: Area2D) -> void:
+	#if area.visible:
+		#if !area.is_in_group("Player Attack"): area.queue_free()
+		#else:
+			#if !was_hit:
+				#health -= 3
+#
+				#was_hit = true
 
 
 func _on_shield_body_entered(body: Node2D) -> void:
-	body.queue_free()
+	#body.queue_free()
+	pass
 
 
 func _on_frame_changed() -> void:

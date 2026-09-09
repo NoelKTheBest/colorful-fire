@@ -52,6 +52,8 @@ var fire = preload('res://music and sound/Fire 4.ogg')
 
 var prev_y_velocity
 
+var player_wins = false
+
 @onready var fire_scene = preload("res://flames.tscn")
 @onready var jump_buffer_timer: Timer = $JumpBufferTimer
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -291,6 +293,7 @@ func spawn_flames():
 
 func die():
 	queue_free()
+	get_tree().reload_current_scene()
 
 
 func _on_timer_timeout() -> void:
@@ -387,7 +390,7 @@ func reset_attack_var():
 
 
 func _on_hurtbox_player_was_hit() -> void:
-	if !dodging:
+	if !dodging and !player_wins:
 		health -= 1
 		was_hit = true
 		$Camera2D.apply_shake()
@@ -404,3 +407,7 @@ func _on_hitbox_player_hit_boss() -> void:
 
 func _on_boss_boss_was_hit() -> void:
 	$Camera2D.apply_shake()
+
+
+func _on_boss_boss_died() -> void:
+	player_wins = true

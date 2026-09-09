@@ -18,6 +18,8 @@ func _ready() -> void:
 	init_positions[1] = $Projectile2.position
 	init_positions[2] = $Projectile3.position
 	init_positions[3] = $Projectile4.position
+	
+	activate_projectiles()
 
 
 #func _unhandled_key_input(event: InputEvent) -> void:

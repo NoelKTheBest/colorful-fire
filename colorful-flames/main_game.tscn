@@ -16,6 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://dd5li6uxquwjg" path="res://enemies/ExperimentZ #20/boss.tscn" id="13_krmtw"]
 [ext_resource type="PackedScene" uid="uid://c1klgimmiy2v" path="res://enemies/ExperimentZ #20/ultimate.tscn" id="15_qpaub"]
 [ext_resource type="Script" uid="uid://ds28inmpv6nab" path="res://tutorial.gd" id="16_an1vu"]
+[ext_resource type="Theme" uid="uid://bgha8pjj700mg" path="res://purple_label_theme.tres" id="17_borgi"]
+[ext_resource type="Script" uid="uid://bxodvekjwvwmm" path="res://game_pause.gd" id="18_ih6an"]
+[ext_resource type="Texture2D" uid="uid://o87pmdly6453" path="res://DangerRing.png" id="19_umrn2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2pltu"]
 texture = ExtResource("1_ykeeq")
@@ -4655,8 +4658,37 @@ _data = {
 &"text_scroll": SubResource("Animation_borgi")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vosfo"]
+bg_color = Color(0, 0.7087922, 0.75648403, 1)
+skew = Vector2(0.09, 0.045)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0.9833336, 1, 0.8627451)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 20
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="Theme" id="Theme_yxwtl"]
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.7058824)
+Label/constants/shadow_offset_x = -1
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 3
+Label/font_sizes/font_size = 30
+Label/styles/normal = SubResource("StyleBoxFlat_vosfo")
+
 [node name="Node" type="Node" unique_id=1338135851]
 script = ExtResource("1_krmtw")
+rm = 35
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=861010928]
 scroll_scale = Vector2(0.2, 1)
@@ -4744,6 +4776,7 @@ metadata/_edit_group_ = true
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D" unique_id=1943286930]
 process_mode = 3
 stream = ExtResource("11_jgkyn")
+volume_db = -12.283
 autoplay = true
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=680884208]
@@ -4760,16 +4793,17 @@ position = Vector2(9, -8)
 [node name="CubicPoints" type="Node" parent="." unique_id=2103889090]
 
 [node name="Node2D" type="Node2D" parent="CubicPoints" unique_id=1030532958 groups=["Cubic Points"]]
-position = Vector2(160, -136)
+position = Vector2(424, -144)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CubicPoints/Node2D" unique_id=973343354]
 self_modulate = Color(0, 1, 0.033422947, 1)
-position = Vector2(192, 48)
 scale = Vector2(0.23, 0.23)
 texture = ExtResource("11_aomqu")
 
 [node name="Node2D2" type="Node2D" parent="CubicPoints" unique_id=540046704 groups=["Cubic Points"]]
-position = Vector2(-440, -616)
+position = Vector2(-736, -944)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CubicPoints/Node2D2" unique_id=296130798]
 self_modulate = Color(0, 1, 0.033422947, 1)
@@ -4777,7 +4811,8 @@ scale = Vector2(0.23, 0.23)
 texture = ExtResource("11_aomqu")
 
 [node name="Node2D3" type="Node2D" parent="CubicPoints" unique_id=1732014065 groups=["Cubic Points"]]
-position = Vector2(712, 488)
+position = Vector2(1568, 328)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CubicPoints/Node2D3" unique_id=1286761262]
 self_modulate = Color(0, 1, 0.033422947, 1)
@@ -4785,18 +4820,19 @@ scale = Vector2(0.23, 0.23)
 texture = ExtResource("11_aomqu")
 
 [node name="Node2D4" type="Node2D" parent="CubicPoints" unique_id=592565207 groups=["Cubic Points"]]
-position = Vector2(-176, 96)
+position = Vector2(-600, -200)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CubicPoints/Node2D4" unique_id=1932558077]
 self_modulate = Color(0, 1, 0.033422947, 1)
-position = Vector2(-32, 32)
 scale = Vector2(0.23, 0.23)
 texture = ExtResource("11_aomqu")
 
 [node name="QuadraticPoints" type="Node" parent="." unique_id=883061873]
 
 [node name="Node2D" type="Node2D" parent="QuadraticPoints" unique_id=2051357706 groups=["Quadratic Points"]]
-position = Vector2(288, -128)
+position = Vector2(328, -208)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="QuadraticPoints/Node2D" unique_id=868394218]
 self_modulate = Color(0, 0.23333359, 1, 1)
@@ -4804,7 +4840,8 @@ scale = Vector2(0.18, 0.18)
 texture = ExtResource("11_aomqu")
 
 [node name="Node2D2" type="Node2D" parent="QuadraticPoints" unique_id=440114707 groups=["Quadratic Points"]]
-position = Vector2(-400, -24)
+position = Vector2(-360, 160)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="QuadraticPoints/Node2D2" unique_id=739290031]
 self_modulate = Color(0, 0.23333359, 1, 1)
@@ -4812,11 +4849,11 @@ scale = Vector2(0.18, 0.18)
 texture = ExtResource("11_aomqu")
 
 [node name="Node2D3" type="Node2D" parent="QuadraticPoints" unique_id=196261789 groups=["Quadratic Points"]]
-position = Vector2(448, 232)
+position = Vector2(616, -120)
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="QuadraticPoints/Node2D3" unique_id=2108227758]
 self_modulate = Color(0, 0.23333359, 1, 1)
-position = Vector2(-160.00002, -144.00002)
 scale = Vector2(0.18, 0.18)
 texture = ExtResource("11_aomqu")
 
@@ -4857,6 +4894,7 @@ offset_left = 256.0
 offset_top = 600.0
 offset_right = 1003.0
 offset_bottom = 623.0
+theme = ExtResource("17_borgi")
 text = "Hello, and welcome to my game! My name is Nina and I need your help to defeat this evil demon."
 visible_characters = 0
 visible_ratio = 0.0
@@ -4869,10 +4907,23 @@ process_mode = 3
 one_shot = true
 autostart = true
 
-[node name="Controls" type="Label" parent="Tutorial" unique_id=569307517]
+[node name="Label2" type="Label" parent="Tutorial" unique_id=658823096]
+offset_left = 24.0
+offset_top = 560.0
+offset_right = 64.0
+offset_bottom = 583.0
+
+[node name="GamePause" type="CanvasLayer" parent="." unique_id=644525022]
+process_mode = 3
+script = ExtResource("18_ih6an")
+
+[node name="Controls" type="Label" parent="GamePause" unique_id=569307517]
 visible = false
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 471.0
+offset_bottom = 288.0
+theme = ExtResource("17_borgi")
 theme_override_font_sizes/font_size = 27
 text = "Space - jump
 WASD - move
@@ -4882,9 +4933,33 @@ F - Flame Ability
 U - Dodge
 [Esc] - continue"
 
+[node name="You WIN" type="CanvasLayer" parent="." unique_id=633562472]
+
+[node name="WINNER" type="Label" parent="You WIN" unique_id=1684914271]
+visible = false
+offset_left = 512.0
+offset_top = 320.0
+offset_right = 674.0
+offset_bottom = 366.0
+theme = SubResource("Theme_yxwtl")
+text = "YOU WIN!!!"
+
+[node name="GameWinTimer" type="Timer" parent="." unique_id=1163251620]
+
+[node name="DangerRing" type="Sprite2D" parent="." unique_id=995894755]
+position = Vector2(168, -176)
+texture = ExtResource("19_umrn2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DangerRing" unique_id=1739440690]
+
 [connection signal="boss_attacking" from="Boss" to="." method="_on_boss_boss_attacking"]
+[connection signal="boss_died" from="Boss" to="." method="_on_boss_boss_died"]
+[connection signal="boss_died" from="Boss" to="CharacterBody2D" method="_on_boss_boss_died"]
 [connection signal="boss_was_hit" from="Boss" to="CharacterBody2D" method="_on_boss_boss_was_hit"]
+[connection signal="ult_activated" from="Boss" to="." method="_on_boss_ult_activated"]
 [connection signal="ult_notify" from="Boss" to="." method="_on_boss_ult_notify"]
 [connection signal="tutorial_finished" from="Tutorial" to="." method="_on_tutorial_tutorial_finished"]
+[connection signal="tutorial_finished" from="Tutorial" to="GamePause" method="_on_tutorial_tutorial_finished"]
 [connection signal="timeout" from="Tutorial/TutoTimer" to="." method="_on_tuto_timer_timeout"]
 [connection signal="timeout" from="Tutorial/TutoTimer" to="Tutorial" method="_on_tuto_timer_timeout"]
+[connection signal="timeout" from="GameWinTimer" to="." method="_on_game_win_timer_timeout"]

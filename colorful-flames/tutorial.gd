@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal tutorial_finished
+var tuto_finished = false
 var tuto_step = 1
 
 var tuto_text = [
@@ -25,6 +26,8 @@ func _notification(what: int) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and get_tree().paused:
+		#$Label2.text = str(tuto_step)
+		#print(event)
 		match tuto_step:
 			1:
 				if event.keycode == Key.KEY_ENTER:
@@ -57,14 +60,19 @@ func _unhandled_key_input(event: InputEvent) -> void:
 					$AnimationPlayer.play(&'text_scroll')
 					tuto_step += 1
 			6:
-				if event.keycode == Key.KEY_ENTER:
+				if event.keycode == Key.KEY_ENTER and event.is_pressed():
 					$Label.text = tuto_text[tuto_step]
 					$AnimationPlayer.play(&'text_scroll')
 					tuto_step += 1
 			7:
-				if event.keycode == Key.KEY_ENTER:
+				# I can also use this
+				#print(event.is_pressed())
+				#print(event.is_released())
+				if event.keycode == Key.KEY_ENTER and !event.is_released():
 					get_tree().paused = false
+					tuto_step += 1
 					tutorial_finished.emit()
+					tuto_finished = true
 
 
 func _on_tuto_timer_timeout() -> void:

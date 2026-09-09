@@ -1,0 +1,20 @@
+[gd_resource type="Theme" format=3 uid="uid://bgha8pjj700mg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_borgi"]
+bg_color = Color(0.13146001, 0.117599994, 0.21, 0.827451)
+border_width_left = 4
+border_width_top = 1
+border_width_right = 4
+border_width_bottom = 1
+border_color = Color(0.31687486, 0.007499993, 0.75, 0.42352942)
+border_blend = true
+corner_radius_top_left = 7
+corner_radius_bottom_right = 7
+expand_margin_left = 14.0
+expand_margin_top = 2.0
+expand_margin_right = 14.0
+expand_margin_bottom = 4.0
+anti_aliasing_size = 3.262
+
+[resource]
+Label/styles/normal = SubResource("StyleBoxFlat_borgi")

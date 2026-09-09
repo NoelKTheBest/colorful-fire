@@ -17,6 +17,11 @@ z_index = 4
 scale = Vector2(0.405, 0.405)
 texture = ExtResource("3_4rc3b")
 
+[node name="Polygon2D" type="Polygon2D" parent="Projectile" unique_id=999692023]
+scale = Vector2(0.63, 0.63)
+color = Color(0.23693943, 0.06860618, 0.1287325, 1)
+polygon = PackedVector2Array(-24, -24, 0, 24, 24, -24)
+
 [node name="Projectile2" parent="." unique_id=97707647 instance=ExtResource("2_1je8i")]
 position = Vector2(776, -504)
 metadata/_edit_group_ = true
@@ -26,6 +31,11 @@ self_modulate = Color(1, 0, 0, 1)
 z_index = 4
 scale = Vector2(0.405, 0.405)
 texture = ExtResource("3_4rc3b")
+
+[node name="Polygon2D" type="Polygon2D" parent="Projectile2" unique_id=191082727]
+scale = Vector2(0.63, 0.63)
+color = Color(0.23693943, 0.06860618, 0.1287325, 1)
+polygon = PackedVector2Array(-24, -24, 0, 24, 24, -24)
 
 [node name="Projectile3" parent="." unique_id=2132843220 instance=ExtResource("2_1je8i")]
 position = Vector2(1048, -352)
@@ -37,6 +47,11 @@ z_index = 4
 scale = Vector2(0.405, 0.405)
 texture = ExtResource("3_4rc3b")
 
+[node name="Polygon2D" type="Polygon2D" parent="Projectile3" unique_id=1707222350]
+scale = Vector2(0.63, 0.63)
+color = Color(0.23693943, 0.06860618, 0.1287325, 1)
+polygon = PackedVector2Array(-24, -24, 0, 24, 24, -24)
+
 [node name="Projectile4" parent="." unique_id=2062442527 instance=ExtResource("2_1je8i")]
 position = Vector2(992, -24)
 metadata/_edit_group_ = true
@@ -46,6 +61,11 @@ self_modulate = Color(1, 0, 0, 1)
 z_index = 4
 scale = Vector2(0.405, 0.405)
 texture = ExtResource("3_4rc3b")
+
+[node name="Polygon2D" type="Polygon2D" parent="Projectile4" unique_id=1521703416]
+scale = Vector2(0.63, 0.63)
+color = Color(0.23693943, 0.06860618, 0.1287325, 1)
+polygon = PackedVector2Array(-24, -24, 0, 24, 24, -24)
 
 [node name="Marker" type="Node2D" parent="." unique_id=760293570 groups=["Linear Points"]]
 position = Vector2(96, 520)
@@ -59,3 +79,6 @@ texture = ExtResource("3_4rc3b")
 wait_time = 3.49
 one_shot = true
 autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=300939944]
+position = Vector2(552, -280)
