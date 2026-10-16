@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://npbm4okx2jwp"]
+
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_53w73"]
+[ext_resource type="Script" uid="uid://c4ew5ac5gnmcb" path="res://3D/camera_3d.gd" id="2_yh2kh"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_sp610"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_po5el"]
+albedo_texture = ExtResource("1_53w73")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sp610"]
+
+[sub_resource type="Sky" id="Sky_po5el"]
+
+[sub_resource type="Environment" id="Environment_sp610"]
+background_mode = 1
+background_color = Color(0.83137256, 1, 1, 1)
+sky = SubResource("Sky_po5el")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="Node3D" type="Node3D" unique_id=85780758]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1449277800]
+transform = Transform3D(5.18, 0, 0, 0, 5.18, 0, 0, 0, 5.18, 0.00074613094, 0, -6.1861963)
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_53w73")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1142341871]
+transform = Transform3D(1, 0, 0, 0, 0.996945, 0.078106344, 0, -0.078106344, 0.996945, 0, 0, 2.3350708)
+current = true
+script = ExtResource("2_yh2kh")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=183739834]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=160699716]
+mesh = SubResource("SphereMesh_sp610")
+surface_material_override/0 = SubResource("StandardMaterial3D_po5el")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=154141159]
+shape = SubResource("SphereShape3D_sp610")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1308403313]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1466743685]
+environment = SubResource("Environment_sp610")
