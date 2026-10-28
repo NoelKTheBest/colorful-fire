@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_53w73"]
 [ext_resource type="Script" uid="uid://c4ew5ac5gnmcb" path="res://3D/camera_3d.gd" id="2_yh2kh"]
+[ext_resource type="Script" uid="uid://d1bthd24d3aej" path="res://3D/rigid_body_3d.gd" id="3_gdn4q"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_sp610"]
 
@@ -10,11 +11,14 @@ albedo_texture = ExtResource("1_53w73")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sp610"]
 
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_xs6oq"]
+
 [sub_resource type="Sky" id="Sky_po5el"]
+sky_material = SubResource("PhysicalSkyMaterial_xs6oq")
 
 [sub_resource type="Environment" id="Environment_sp610"]
-background_mode = 1
-background_color = Color(0.83137256, 1, 1, 1)
+background_mode = 2
+background_color = Color(0.8617083, 0.19850561, 0.19850561, 1)
 sky = SubResource("Sky_po5el")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
@@ -26,12 +30,43 @@ transform = Transform3D(5.18, 0, 0, 0, 5.18, 0, 0, 0, 5.18, 0.00074613094, 0, -6
 modulate = Color(0, 0, 0, 1)
 texture = ExtResource("1_53w73")
 
+[node name="Sprite3D2" type="Sprite3D" parent="." unique_id=361897090]
+transform = Transform3D(2.8696525, 0, -4.3124804, 0, 5.1799994, 0, 4.3124804, 0, 2.8696525, 9.589259, 0, 1.0268984)
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_53w73")
+
+[node name="Sprite3D3" type="Sprite3D" parent="." unique_id=261577226]
+transform = Transform3D(-1.5872303, 0, -4.93083, 0, 5.179999, 0, 4.93083, 0, -1.5872303, 10.770166, 0, 17.416273)
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_53w73")
+
+[node name="Sprite3D4" type="Sprite3D" parent="." unique_id=660379310]
+transform = Transform3D(-5.177987, 0, -0.14434195, 0, 5.179998, 0, 0.14434195, 0, -5.177987, 0.7115917, 0, 26.123999)
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_53w73")
+
+[node name="Sprite3D5" type="Sprite3D" parent="." unique_id=1206821989]
+transform = Transform3D(-4.308285, 0, 2.875946, 0, 5.179998, 0, -2.875946, 0, -4.308285, -11.9766865, 0, 21.022343)
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_53w73")
+
+[node name="Sprite3D6" type="Sprite3D" parent="." unique_id=646323041]
+transform = Transform3D(-0.330549, 0, 5.169441, 0, 5.179998, 0, -5.169441, 0, -0.330549, -17.252655, 0, 8.327137)
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_53w73")
+
+[node name="Sprite3D7" type="Sprite3D" parent="." unique_id=886469944]
+transform = Transform3D(2.9728358, 0, 4.242008, 0, 5.179998, 0, -4.242008, 0, 2.9728358, -12.223652, 0, -2.1071835)
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("1_53w73")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1142341871]
 transform = Transform3D(1, 0, 0, 0, 0.996945, 0.078106344, 0, -0.078106344, 0.996945, 0, 0, 2.3350708)
 current = true
 script = ExtResource("2_yh2kh")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=183739834]
+script = ExtResource("3_gdn4q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=160699716]
 mesh = SubResource("SphereMesh_sp610")
@@ -44,3 +79,9 @@ shape = SubResource("SphereShape3D_sp610")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1466743685]
 environment = SubResource("Environment_sp610")
+
+[node name="Timer" type="Timer" parent="." unique_id=711153816]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="RigidBody3D" method="_on_timer_timeout"]
