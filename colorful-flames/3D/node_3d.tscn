@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://npbm4okx2jwp"]
 
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_53w73"]
+[ext_resource type="Script" uid="uid://bwr5ddfi0j04e" path="res://3D/node_3d.gd" id="1_xs6oq"]
 [ext_resource type="Script" uid="uid://c4ew5ac5gnmcb" path="res://3D/camera_3d.gd" id="2_yh2kh"]
 [ext_resource type="Script" uid="uid://d1bthd24d3aej" path="res://3D/rigid_body_3d.gd" id="3_gdn4q"]
 
@@ -11,19 +12,14 @@ albedo_texture = ExtResource("1_53w73")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sp610"]
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_xs6oq"]
-
-[sub_resource type="Sky" id="Sky_po5el"]
-sky_material = SubResource("PhysicalSkyMaterial_xs6oq")
-
 [sub_resource type="Environment" id="Environment_sp610"]
-background_mode = 2
-background_color = Color(0.8617083, 0.19850561, 0.19850561, 1)
-sky = SubResource("Sky_po5el")
+background_mode = 1
+background_color = Color(0.55336887, 0.9143204, 0.90832645, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="Node3D" type="Node3D" unique_id=85780758]
+script = ExtResource("1_xs6oq")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1449277800]
 transform = Transform3D(5.18, 0, 0, 0, 5.18, 0, 0, 0, 5.18, 0.00074613094, 0, -6.1861963)
@@ -61,7 +57,7 @@ modulate = Color(0, 0, 0, 1)
 texture = ExtResource("1_53w73")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1142341871]
-transform = Transform3D(1, 0, 0, 0, 0.996945, 0.078106344, 0, -0.078106344, 0.996945, 0, 0, 2.3350708)
+transform = Transform3D(1, 0, 0, 0, 0.996945, 0.078106344, 0, -0.078106344, 0.996945, 0, 6.3172154, 11.630115)
 current = true
 script = ExtResource("2_yh2kh")
 
